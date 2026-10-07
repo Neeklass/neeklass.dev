@@ -1,8 +1,13 @@
 # Repository guidance
 
 Build a durable personal technical home for Niklas Dittmann (`neeklass`).
-Recruiters should understand his work quickly; engineers should be able to
-explore projects, decisions, code and writing in depth.
+Let genuine writing and real work provide its substance.
+
+- The homepage is intentionally minimal: its main content is only the name
+  `Niklas Dittmann` in one `h1`, in both languages. Do not add positioning copy,
+  portfolio sections, project placeholders, experience placeholders or biography
+  until real content and a deliberate content decision exist. Preserve functional
+  site chrome and neutral locale-aware metadata.
 
 - `neeklass.dev` is intentionally a single Astro application. Blog, projects,
   about and CV are sections of the same site. Do not split them into separate

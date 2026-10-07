@@ -6,6 +6,14 @@ there are no external fonts or analytics. Light and dark themes default to the
 visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
 
+Both homepages intentionally contain only `Niklas Dittmann` in a single `h1`
+inside `main`, with generous whitespace and the shared navigation and footer.
+Do not add positioning copy, portfolio sections, project placeholders, experience
+placeholders or biography until real content and a deliberate content decision
+exist. The site should gain substance through genuine writing and real work;
+the blog is currently the primary place for that content. Homepage metadata
+remains neutral and locale-aware.
+
 ## Architecture
 
 **One personal website, one Astro app, one deployment, multiple areas.**
@@ -139,7 +147,8 @@ different article slugs in each language.
 The layout sets document language, canonical URL, Open Graph locale and alternate
 locales. `x-default` points to the German counterpart when one exists. Canonical
 and alternate URLs use the configured production `site`, including in local
-previews. Brand and footer links return to the current language’s homepage.
+previews. The brand returns to the current language’s homepage; the footer links
+to GitHub and the current language’s RSS feed.
 Language selection uses ordinary HTML links without cookies, JavaScript,
 automatic translation or browser-language redirects.
 
@@ -258,19 +267,19 @@ article URLs, titles, descriptions, dates and tags. Feeds intentionally contain
 summaries rather than full HTML bodies. They remain valid when empty. Each blog
 index links to its feed; document heads support RSS autodiscovery.
 
-Use `getPublishedPosts(locale)` from `src/lib/blog.ts` for future homepage writing
-sections, for example `(await getPublishedPosts('de')).slice(0, 3)`. It returns
-newest-first posts with resolved `locale`, `slug` and `url`, excluding drafts in
-all environments. No invented homepage articles are included.
+`getPublishedPosts(locale)` from `src/lib/blog.ts` returns newest-first posts with
+resolved `locale`, `slug` and `url`, excluding drafts in all environments. It can
+support future writing sections if deliberately requested. The homepage currently
+shows only the name; do not add excerpts or placeholders automatically.
 
 ## Incremental roadmap
 
-The bilingual foundation and blog/RSS are implemented. The existing homepage
-design and copy are preserved, with Blog added to the shared navigation.
+The bilingual foundation and blog/RSS are implemented. The homepage is
+intentionally limited to the name; Blog remains in the shared navigation.
 
-1. Improve the homepage with verified selected work, professional context, an
-   About page and confirmed contact/LinkedIn links. Add CV and writing links as
-   those destinations become available.
+1. Keep the homepage minimal. Add content or areas only when real material and
+   a deliberate content decision exist; expose navigation when destinations are
+   available.
 2. Add real technical writing to the existing blog collection as it is ready.
 3. Add a project collection at `/projects/` and `/en/projects/`, an overview and
    case studies explaining problems,

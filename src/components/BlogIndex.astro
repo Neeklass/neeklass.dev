@@ -19,7 +19,6 @@ const posts = await getPublishedPosts(locale);
   <section class="blog-index" aria-labelledby="blog-title">
     <header class="blog-heading">
       <h1 id="blog-title">{ui.blog}</h1>
-      <p class="lead">{ui.blogDescription}</p>
       <a class="rss-link" href={`${blogPaths[locale]}rss.xml`}>{ui.rss}</a>
     </header>
     {posts.length === 0 ? <p class="blog-empty">{ui.noPosts}</p> : (
