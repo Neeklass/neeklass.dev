@@ -1,8 +1,9 @@
 # neeklass.dev
 
 Niklas Dittmann’s personal technical home. A bilingual, static Astro site built with
-TypeScript and plain CSS. No client-side JavaScript, external fonts or analytics.
-Light and dark themes follow the visitor’s system preference.
+TypeScript and plain CSS. A small inline script handles appearance preferences;
+there are no external fonts or analytics. Light and dark themes default to the
+visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
 
 ## Architecture
@@ -75,7 +76,7 @@ src/layouts/ArticleLayout.astro Article metadata and Markdown body
 src/pages/index.astro        German homepage content
 src/pages/en/index.astro     English homepage content
 src/pages/{blog,en/blog}/    Blog indexes, article routes and RSS endpoints
-src/styles/global.css       Tokens, layout and system-preference themes
+src/styles/global.css       Tokens, layout and light/dark/system themes
 src/styles/blog.css          Reading layout, Markdown and code styles
 astro.config.mjs             Static output and production URL
 ```
@@ -86,7 +87,40 @@ become reusable. The blog uses [Astro Content Collections](https://docs.astro.bu
 and the built-in glob loader. Markdown and syntax highlighting are built in;
 MDX is not installed. The only added dependency is
 [`@astrojs/rss`](https://docs.astro.build/en/recipes/rss/) for static, correctly
-escaped RSS XML. No client-side scripts are needed.
+escaped RSS XML. The blog itself requires no client-side scripts.
+
+## Shared UI and appearance
+
+The header contains the brand, available internal destinations as text, `DE EN`,
+and a small appearance button. Language links use `Deutsch` / `English` accessible
+names, no flags, and link only to existing counterparts. Future destinations are
+added only when their pages contain real content. Small screens use wrapping.
+
+The appearance button cycles **System → Light → Dark → System** (German:
+**System → Hell → Dunkel**). Its translated accessible name and tooltip state
+the current mode and next action; changes are also announced by a status region.
+It supports keyboard activation with Enter or Space and a visible focus outline.
+
+`src/scripts/theme.js` is the only client-side script. It runs inline in the head
+to apply `data-theme` before first paint, then connects the control when the DOM
+is ready. Manual `light` / `dark` choices use the `neeklass-theme` localStorage
+key. Choosing System removes the key. System mode follows OS/browser changes
+immediately through CSS, including code highlighting. Other open tabs synchronize
+saved preferences. Invalid or inaccessible storage falls back to System; if
+saving is blocked, switching still works for the current page. Without JavaScript,
+the control stays hidden and CSS continues to follow the system preference.
+
+The unchanged warm/green palette is centralized in `src/styles/global.css` using
+[`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark)
+and `color-scheme`. Syntax highlighting follows the same selected scheme.
+No theme library, animation, network request or framework is involved.
+
+Use text for primary navigation and icons only for utilities or external profiles.
+GitHub and the current language's RSS feed are inline SVG footer links with
+accessible labels, tooltips, `currentColor`, visible focus and 44px hit areas.
+Their small local components live in `src/components/icons/`. No icon library
+is installed. Reuse `.editorial-meta` for quiet monospace metadata and use rules,
+spacing and typography for hierarchy rather than cards or decorative elements.
 
 ## Locale conventions
 
@@ -206,6 +240,13 @@ is always copied to the production build. Hero images are not required.
 Use fenced code blocks with a language identifier, such as `ts`, `python` or
 `sh`. Astro's built-in Shiki produces static highlighting for system light/dark
 themes. Long code lines scroll inside keyboard-focusable code blocks.
+
+Reading time appears on articles and index entries as `N Min. Lesezeit` / `N min
+read`. The local `src/lib/reading-time.ts` helper estimates 200 words per minute,
+rounded up to at least one minute, at build time (on demand in development).
+Comments, fenced code, images, HTML tags and inline link targets are omitted.
+This is an approximate prose reading time, not an estimate of time to study code
+or diagrams. There is no extra metadata, package or browser computation.
 
 ### RSS and homepage integration
 

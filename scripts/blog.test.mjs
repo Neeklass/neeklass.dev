@@ -72,7 +72,12 @@ test('static blog publication, translation links, RSS and draft isolation', { ti
     assert.match(german, /class="astro-code/);
     assert.match(german, /tabindex="0"/);
     assert.match(german, /alt="Test diagram"/);
-    assert.doesNotMatch(german, /<script\b|noindex/);
+    assert.doesNotMatch(german, /noindex/);
+    const pageScripts = [...german.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
+    assert.equal(pageScripts.length, 1, 'Only the theme control needs client-side JavaScript');
+    assert.equal(pageScripts[0][1].trim(), (await readFile(join(root, 'src/scripts/theme.js'), 'utf8')).trim());
+    assert.match(german, /1 Min\. Lesezeit/);
+    assert.match(english, /1 min read/);
     assert.doesNotMatch(await html('blog/nur-deutsch'), /hreflang="en"|unpublished-translation/);
     assert.doesNotMatch(await html('en/blog/english-only'), /hreflang="de"|hreflang="x-default"/);
 

@@ -6,6 +6,7 @@ export default defineConfig({
   markdown: {
     shikiConfig: {
       themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
       transformers: [{
         pre(node) {
           // Make horizontally scrollable code blocks reachable by keyboard.

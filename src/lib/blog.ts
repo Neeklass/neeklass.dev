@@ -1,10 +1,12 @@
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { blogPaths, type Locale, type PageTranslations } from '../i18n';
+import { estimateReadingMinutes } from './reading-time';
 
 export type BlogPost = CollectionEntry<'blog'> & {
   locale: Locale;
   slug: string;
   url: string;
+  readingMinutes: number;
 };
 
 async function getPosts(): Promise<BlogPost[]> {
@@ -17,7 +19,10 @@ async function getPosts(): Promise<BlogPost[]> {
       throw new Error(`Duplicate blog translationKey in ${locale}: ${entry.data.translationKey}`);
     }
     translationKeys.add(key);
-    return { ...entry, locale, slug, url: `${blogPaths[locale]}${slug}/` };
+    return {
+      ...entry, locale, slug, url: `${blogPaths[locale]}${slug}/`,
+      readingMinutes: estimateReadingMinutes(entry.body),
+    };
   });
   return posts.sort((a, b) =>
     b.data.publishedAt.getTime() - a.data.publishedAt.getTime() || a.id.localeCompare(b.id),

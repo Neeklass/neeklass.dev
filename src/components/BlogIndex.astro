@@ -26,9 +26,12 @@ const posts = await getPublishedPosts(locale);
       <ol class="post-list">
         {posts.map((post) => (
           <li>
-            <time datetime={post.data.publishedAt.toISOString()}>
-              {formatPostDate(post.data.publishedAt, locale)}
-            </time>
+            <div class="post-meta editorial-meta">
+              <time datetime={post.data.publishedAt.toISOString()}>
+                {formatPostDate(post.data.publishedAt, locale)}
+              </time>
+              <span>{post.readingMinutes} {ui.readingTime}</span>
+            </div>
             <h2><a href={post.url}>{post.data.title}</a></h2>
             <p>{post.data.description}</p>
           </li>

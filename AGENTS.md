@@ -15,6 +15,13 @@ explore projects, decisions, code and writing in depth.
 - Keep route names English (`/projects`, `/about`). Link real translations
   explicitly; never redirect based on browser language or translate at runtime.
 - Preserve the minimal editorial design, system fonts and system light/dark theme.
+- Keep the visual language restrained and editorial. Use text for primary
+  navigation and icons only for utilities or external profiles. Avoid generic
+  AI/SaaS aesthetics, excessive cards, gradients, glass effects, terminal
+  simulations and unnecessary animation.
+- Keep palette values in the shared CSS. Appearance defaults to System; manual
+  Light/Dark choices persist locally. The theme control is the only client-side
+  script. Maintain its pre-paint initialization and no-JavaScript system fallback.
 - Keep Astro, TypeScript, plain CSS and static output. Prefer HTML and avoid
   client-side JavaScript unless it provides meaningful functionality.
 - Do not add a frontend framework, CMS, database or dependencies without a

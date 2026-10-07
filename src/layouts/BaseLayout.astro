@@ -1,5 +1,9 @@
 ---
 import '../styles/global.css';
+import ThemeControl from '../components/ThemeControl.astro';
+import GithubIcon from '../components/icons/GithubIcon.astro';
+import RssIcon from '../components/icons/RssIcon.astro';
+import themeScript from '../scripts/theme.js?raw';
 import {
   blogPaths,
   homePaths,
@@ -36,6 +40,7 @@ const year = new Date().getFullYear();
 <html lang={locale}>
   <head>
     <meta charset="UTF-8" />
+    <script is:inline set:html={themeScript} />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
@@ -73,7 +78,6 @@ const year = new Date().getFullYear();
         <div class="header-navigation">
           <nav class="primary-navigation" aria-label={ui.navigation}>
             <a href={blogPaths[locale]} aria-current={Astro.url.pathname === blogPaths[locale] ? 'page' : undefined}>{ui.blog}</a>
-            <a href="https://github.com/Neeklass" rel="me">GitHub</a>
           </nav>
           <nav class="language-switch" aria-label={ui.languageNavigation}>
             {alternates.map(({ language }) => (
@@ -88,6 +92,7 @@ const year = new Date().getFullYear();
               </a>
             ))}
           </nav>
+          <ThemeControl locale={locale} />
         </div>
       </header>
       <main id="main" tabindex="-1">
@@ -95,7 +100,10 @@ const year = new Date().getFullYear();
       </main>
       <footer class="site-footer">
         <span>© {year} Niklas Dittmann</span>
-        <a href={homePaths[locale]}>neeklass.dev</a>
+        <div class="footer-links">
+          <a class="icon-control" href="https://github.com/Neeklass" rel="me" aria-label="GitHub" title="GitHub"><GithubIcon /></a>
+          <a class="icon-control" href={`${blogPaths[locale]}rss.xml`} aria-label={ui.rssSubscribe} title={ui.rssSubscribe}><RssIcon /></a>
+        </div>
       </footer>
     </div>
   </body>

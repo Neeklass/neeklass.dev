@@ -30,11 +30,12 @@ const showUpdated = data.updatedAt && data.updatedAt.getTime() > data.publishedA
     <header class="article-heading">
       <h1 id="article-title">{data.title}</h1>
       <p class="lead">{data.description}</p>
-      <div class="article-dates">
+      <div class="article-dates editorial-meta">
         <p>{ui.published} <time datetime={data.publishedAt.toISOString()}>{formatPostDate(data.publishedAt, locale)}</time></p>
         {showUpdated && data.updatedAt && (
           <p>{ui.updated} <time datetime={data.updatedAt.toISOString()}>{formatPostDate(data.updatedAt, locale)}</time></p>
         )}
+        <p>{post.readingMinutes} {ui.readingTime}</p>
       </div>
       {data.tags.length > 0 && (
         <ul class="post-tags" aria-label={ui.tags}>

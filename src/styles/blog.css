@@ -43,8 +43,6 @@
   padding-block: 2rem;
   border-top: 1px solid var(--border);
 }
-.post-list time,
-.article-dates,
 .post-tags {
   color: var(--muted);
   font-size: 0.8125rem;
@@ -63,11 +61,17 @@
   line-height: 1.2;
   letter-spacing: -0.04em;
 }
-.article-dates {
+.article-dates,
+.post-meta {
   display: flex;
   flex-wrap: wrap;
   gap: 0.25rem 1.5rem;
+}
+.article-dates {
   margin-top: 1.5rem;
+}
+.post-meta {
+  justify-content: space-between;
 }
 .post-tags {
   display: flex;
@@ -167,10 +171,8 @@
   padding-top: 1.5rem;
   border-top: 1px solid var(--border);
 }
-@media (prefers-color-scheme: dark) {
-  .astro-code,
-  .astro-code span {
-    color: var(--shiki-dark) !important;
-    background-color: var(--shiki-dark-bg) !important;
-  }
+.astro-code,
+.astro-code span {
+  color: light-dark(var(--shiki-light), var(--shiki-dark));
+  background-color: light-dark(var(--shiki-light-bg), var(--shiki-dark-bg));
 }
