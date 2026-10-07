@@ -86,10 +86,35 @@ p {
   border-bottom: 1px solid var(--border);
 }
 .brand {
+  position: relative;
   font-size: 1.125rem;
   font-weight: 650;
   letter-spacing: -0.04em;
   text-decoration: none;
+}
+.brand-alias {
+  position: absolute;
+  inset-block-start: calc(100% + 0.5rem);
+  inset-inline-start: 0;
+  color: var(--muted);
+  font: 400 0.6875rem/1.25 var(--font-mono);
+  letter-spacing: 0;
+  pointer-events: none;
+  opacity: 0;
+}
+.brand:hover .brand-alias,
+.brand:focus-visible .brand-alias {
+  opacity: 1;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .brand-alias {
+    transform: translateY(-2px);
+    transition: opacity 160ms ease, transform 160ms ease;
+  }
+  .brand:hover .brand-alias,
+  .brand:focus-visible .brand-alias {
+    transform: translateY(0);
+  }
 }
 .header-navigation {
   display: flex;
