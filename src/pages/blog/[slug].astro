@@ -1,0 +1,11 @@
+---
+import type { InferGetStaticPropsType } from 'astro';
+import ArticleLayout from '../../layouts/ArticleLayout.astro';
+import { getBlogStaticPaths } from '../../lib/blog';
+
+export async function getStaticPaths() {
+  return getBlogStaticPaths('de');
+}
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+---
+<ArticleLayout {...Astro.props} />

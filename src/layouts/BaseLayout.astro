@@ -1,32 +1,63 @@
 ---
 import '../styles/global.css';
+import {
+  blogPaths,
+  homePaths,
+  labels,
+  languageNames,
+  locales,
+  openGraphLocales,
+  type Locale,
+  type PageTranslations,
+} from '../i18n';
 
 interface Props {
-  title?: string;
-  description?: string;
+  locale: Locale;
+  title: string;
+  description: string;
+  translations?: PageTranslations;
+  noindex?: boolean;
+  article?: { publishedAt: Date; updatedAt?: Date };
 }
 
-const {
-  title = 'Niklas Dittmann — Software Engineer',
-  description = 'Niklas Dittmann, Software Engineer and Computer Science Student. A personal home for projects, technical writing and experiments in software, systems, data and applied AI.',
-} = Astro.props;
+const { locale, title, description, translations = {}, noindex = false, article } = Astro.props;
+const ui = labels[locale];
 const canonical = new URL(Astro.url.pathname, Astro.site);
+// Explicit counterpart paths also support translated article slugs later.
+const pageTranslations: PageTranslations = { ...translations, [locale]: Astro.url.pathname };
+const alternates = locales.flatMap((language) => {
+  const path = pageTranslations[language];
+  return path ? [{ language, url: new URL(path, Astro.site) }] : [];
+});
 const year = new Date().getFullYear();
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={locale}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="color-scheme" content="light dark" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    {noindex && <meta name="robots" content="noindex, nofollow" />}
+    <link rel="alternate" type="application/rss+xml" title={`${ui.blog} — neeklass (${locale})`} href={new URL(`${blogPaths[locale]}rss.xml`, Astro.site)} />
     <link rel="canonical" href={canonical} />
+    {alternates.map(({ language, url }) => (
+      <link rel="alternate" hreflang={language} href={url} />
+    ))}
+    {pageTranslations.de && (
+      <link rel="alternate" hreflang="x-default" href={new URL(pageTranslations.de, Astro.site)} />
+    )}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={article ? 'article' : 'website'} />
+    {article && <meta property="article:published_time" content={article.publishedAt.toISOString()} />}
+    {article?.updatedAt && <meta property="article:modified_time" content={article.updatedAt.toISOString()} />}
     <meta property="og:site_name" content="neeklass" />
-    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale" content={openGraphLocales[locale]} />
+    {alternates.filter(({ language }) => language !== locale).map(({ language }) => (
+      <meta property="og:locale:alternate" content={openGraphLocales[language]} />
+    ))}
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
@@ -35,18 +66,36 @@ const year = new Date().getFullYear();
     <meta name="twitter:description" content={description} />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">{ui.skipToContent}</a>
     <div class="site-shell">
       <header class="site-header">
-        <a class="brand" href="/">neeklass</a>
-        <span class="version">v0</span>
+        <a class="brand" href={homePaths[locale]} aria-label={`neeklass — ${ui.home}`}>neeklass</a>
+        <div class="header-navigation">
+          <nav class="primary-navigation" aria-label={ui.navigation}>
+            <a href={blogPaths[locale]} aria-current={Astro.url.pathname === blogPaths[locale] ? 'page' : undefined}>{ui.blog}</a>
+            <a href="https://github.com/Neeklass" rel="me">GitHub</a>
+          </nav>
+          <nav class="language-switch" aria-label={ui.languageNavigation}>
+            {alternates.map(({ language }) => (
+              <a
+                href={pageTranslations[language]}
+                lang={language}
+                hreflang={language}
+                aria-label={languageNames[language]}
+                aria-current={language === locale ? 'page' : undefined}
+              >
+                {language.toUpperCase()}
+              </a>
+            ))}
+          </nav>
+        </div>
       </header>
       <main id="main" tabindex="-1">
         <slot />
       </main>
       <footer class="site-footer">
         <span>© {year} Niklas Dittmann</span>
-        <a href="https://neeklass.dev/">neeklass.dev</a>
+        <a href={homePaths[locale]}>neeklass.dev</a>
       </footer>
     </div>
   </body>

@@ -1,0 +1,39 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { blogPaths, labels, type Locale } from '../i18n';
+import { formatPostDate, getPublishedPosts } from '../lib/blog';
+import '../styles/blog.css';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const ui = labels[locale];
+const posts = await getPublishedPosts(locale);
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${ui.blog} — Niklas Dittmann`}
+  description={ui.blogDescription}
+  translations={blogPaths}
+>
+  <section class="blog-index" aria-labelledby="blog-title">
+    <header class="blog-heading">
+      <h1 id="blog-title">{ui.blog}</h1>
+      <p class="lead">{ui.blogDescription}</p>
+      <a class="rss-link" href={`${blogPaths[locale]}rss.xml`}>{ui.rss}</a>
+    </header>
+    {posts.length === 0 ? <p class="blog-empty">{ui.noPosts}</p> : (
+      <ol class="post-list">
+        {posts.map((post) => (
+          <li>
+            <time datetime={post.data.publishedAt.toISOString()}>
+              {formatPostDate(post.data.publishedAt, locale)}
+            </time>
+            <h2><a href={post.url}>{post.data.title}</a></h2>
+            <p>{post.data.description}</p>
+          </li>
+        ))}
+      </ol>
+    )}
+  </section>
+</BaseLayout>

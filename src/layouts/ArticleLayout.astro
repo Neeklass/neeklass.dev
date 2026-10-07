@@ -1,0 +1,48 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from './BaseLayout.astro';
+import { blogPaths, labels, type PageTranslations } from '../i18n';
+import { formatPostDate, type BlogPost } from '../lib/blog';
+import '../styles/blog.css';
+
+interface Props {
+  post: BlogPost;
+  translations: PageTranslations;
+}
+const { post, translations } = Astro.props;
+const { data, locale } = post;
+const ui = labels[locale];
+const { Content } = await render(post);
+const showUpdated = data.updatedAt && data.updatedAt.getTime() > data.publishedAt.getTime();
+---
+
+<BaseLayout
+  locale={locale}
+  title={`${data.title} — neeklass`}
+  description={data.description}
+  translations={translations}
+  noindex={data.draft}
+  article={{ publishedAt: data.publishedAt, updatedAt: data.updatedAt }}
+>
+  <article class="blog-article" aria-labelledby="article-title">
+    <a class="back-link" href={blogPaths[locale]}>{ui.backToBlog}</a>
+    {data.draft && <p class="draft-notice">{ui.draftNotice}</p>}
+    <header class="article-heading">
+      <h1 id="article-title">{data.title}</h1>
+      <p class="lead">{data.description}</p>
+      <div class="article-dates">
+        <p>{ui.published} <time datetime={data.publishedAt.toISOString()}>{formatPostDate(data.publishedAt, locale)}</time></p>
+        {showUpdated && data.updatedAt && (
+          <p>{ui.updated} <time datetime={data.updatedAt.toISOString()}>{formatPostDate(data.updatedAt, locale)}</time></p>
+        )}
+      </div>
+      {data.tags.length > 0 && (
+        <ul class="post-tags" aria-label={ui.tags}>
+          {data.tags.map((tag) => <li>{tag}</li>)}
+        </ul>
+      )}
+    </header>
+    <div class="prose"><Content /></div>
+    <footer class="article-footer"><a href={blogPaths[locale]}>{ui.backToBlog}</a></footer>
+  </article>
+</BaseLayout>

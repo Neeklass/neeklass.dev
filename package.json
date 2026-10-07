@@ -9,10 +9,12 @@
   "scripts": {
     "dev": "astro dev",
     "check": "astro check",
+    "test:blog": "node --test scripts/blog.test.mjs",
     "build": "astro check && astro build",
     "preview": "astro preview"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.19",
     "astro": "^7.3.5"
   },
   "devDependencies": {

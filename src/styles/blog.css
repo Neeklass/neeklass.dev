@@ -1,0 +1,176 @@
+.blog-index,
+.blog-article {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+  padding-block: clamp(3rem, 7vw, 5rem);
+  overflow-wrap: anywhere;
+}
+.blog-heading,
+.article-heading {
+  margin-bottom: 2.5rem;
+}
+.blog-heading h1 {
+  margin-top: 0;
+}
+.blog-heading .lead,
+.article-heading .lead {
+  max-width: none;
+  margin-top: 1.25rem;
+}
+.rss-link {
+  display: inline-block;
+  margin-top: 1.5rem;
+}
+.rss-link,
+.back-link,
+.article-footer {
+  color: var(--accent);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.blog-empty {
+  padding-block: 2rem;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  line-height: 1.75;
+}
+.post-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.post-list li {
+  padding-block: 2rem;
+  border-top: 1px solid var(--border);
+}
+.post-list time,
+.article-dates,
+.post-tags {
+  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.8;
+}
+.post-list h2 {
+  margin-block: 0.5rem;
+  font-size: 1.5rem;
+}
+.post-list p {
+  color: var(--muted);
+  line-height: 1.75;
+}
+.article-heading h1 {
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.04em;
+}
+.article-dates {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.5rem;
+  margin-top: 1.5rem;
+}
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  padding: 0;
+  margin: 0.75rem 0 0;
+  list-style: none;
+}
+.draft-notice {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--accent);
+  background: var(--selection);
+  font-size: 0.875rem;
+  line-height: 1.7;
+}
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+}
+.prose > * {
+  margin-block: 0 1.5rem;
+}
+.prose :is(h2, h3, h4, h5, h6) {
+  margin-block: 2.5rem 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  scroll-margin-top: 2rem;
+}
+.prose h2 { font-size: 1.625rem; }
+.prose h3 { font-size: 1.25rem; }
+.prose :is(h4, h5, h6) { font-size: 1.0625rem; }
+.prose :is(ul, ol) { padding-left: 1.5rem; }
+.prose li + li { margin-top: 0.375rem; }
+.prose li > :is(ul, ol) { margin-block: 0.5rem; }
+.prose blockquote {
+  margin-inline: 0;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--accent);
+  color: var(--muted);
+}
+.prose :is(img, video) {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin-inline: auto;
+}
+.prose figure { margin-inline: 0; }
+.prose figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.875rem;
+}
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+.prose :not(pre) > code {
+  padding: 0.125rem 0.3rem;
+  background: var(--selection);
+  border-radius: 0.2rem;
+}
+.prose pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 0.25rem;
+  line-height: 1.7;
+  overflow-wrap: normal;
+  tab-size: 2;
+}
+.prose pre code {
+  padding: 0;
+  background: none;
+}
+.prose table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.prose :is(th, td) {
+  padding: 0.625rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+.prose hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin-block: 2.5rem;
+}
+.article-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark) !important;
+    background-color: var(--shiki-dark-bg) !important;
+  }
+}

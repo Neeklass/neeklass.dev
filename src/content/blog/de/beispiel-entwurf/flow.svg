@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="180" viewBox="0 0 720 180">
+  <rect width="720" height="180" fill="#f8f7f3"/>
+  <g fill="none" stroke="#496347" stroke-width="2">
+    <rect x="24" y="48" width="180" height="84" rx="4"/>
+    <rect x="270" y="48" width="180" height="84" rx="4"/>
+    <rect x="516" y="48" width="180" height="84" rx="4"/>
+    <path d="M204 90h54m-10-8 10 8-10 8M450 90h54m-10-8 10 8-10 8"/>
+  </g>
+  <g fill="#262824" font-family="system-ui, sans-serif" font-size="24" text-anchor="middle">
+    <text x="114" y="99">Markdown</text>
+    <text x="360" y="99">Astro</text>
+    <text x="606" y="99">HTML</text>
+  </g>
+</svg>

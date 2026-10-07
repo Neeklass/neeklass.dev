@@ -1,42 +1,48 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { homePaths } from '../i18n';
 ---
 
-<BaseLayout>
+<BaseLayout
+  locale="de"
+  title="Niklas Dittmann — Softwareentwickler"
+  description="Niklas Dittmann, Softwareentwickler und Informatikstudent. Mein persönlicher Ort für Projekte, technische Artikel und Experimente mit Software, Systemen, Daten und angewandter KI."
+  translations={homePaths}
+>
   <section class="introduction" aria-labelledby="name">
-    <p class="eyebrow">Software Engineer · Computer Science Student</p>
+    <p class="eyebrow">Softwareentwickler · Informatikstudent</p>
     <h1 id="name">Niklas Dittmann{' '}<span class="role">Software Engineer.</span></h1>
     <p class="lead">
-      I build software and explore data,<br class="wide-break" /> systems and applied AI.
+      Ich entwickle Software und beschäftige mich mit<br class="wide-break" /> Daten, Systemen und angewandter KI.
     </p>
     <p class="intro-note">
-      Interested in the ideas behind useful software:<br class="wide-break" /> from backend systems to developer tools.
+      Mich interessieren die Ideen hinter nützlicher Software:<br class="wide-break" /> von Backend-Systemen bis zu Entwicklertools.
     </p>
   </section>
 
   <section class="site-direction" aria-labelledby="direction-title">
     <div class="direction-intro">
-      <h2 id="direction-title">A place for the work<br class="wide-break" /> and the thinking.</h2>
+      <h2 id="direction-title">Ein Ort fürs Bauen<br class="wide-break" /> und Weiterdenken.</h2>
       <p>
-        This is my corner of the web for projects, technical writing and experiments.
-        A collection that will grow over time.
+        Hier sammle ich Projekte, technische Artikel und Experimente.
+        Mein persönlicher Ort im Web, der mit der Zeit wächst.
       </p>
     </div>
     <ol class="future-sections">
       <li>
         <span class="section-number" aria-hidden="true">01</span>
-        <span>Projects</span>
-        <span class="section-note">Things I build</span>
+        <span>Projekte</span>
+        <span class="section-note">Was ich entwickle</span>
       </li>
       <li>
         <span class="section-number" aria-hidden="true">02</span>
-        <span>Writing</span>
-        <span class="section-note">Ideas I explore</span>
+        <span>Artikel</span>
+        <span class="section-note">Was mich beschäftigt</span>
       </li>
       <li>
         <span class="section-number" aria-hidden="true">03</span>
-        <span>About</span>
-        <span class="section-note">The person behind it</span>
+        <span>Über mich</span>
+        <span class="section-note">Der Mensch dahinter</span>
       </li>
     </ol>
   </section>

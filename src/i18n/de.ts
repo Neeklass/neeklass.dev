@@ -1,0 +1,15 @@
+export default {
+  skipToContent: 'Zum Inhalt springen',
+  navigation: 'Hauptnavigation',
+  languageNavigation: 'Sprache wählen',
+  home: 'Startseite',
+  blog: 'Blog',
+  blogDescription: 'Technische Artikel und Notizen zu Software, Systemen und Experimenten.',
+  noPosts: 'Hier sind noch keine Artikel veröffentlicht.',
+  rss: 'Per RSS abonnieren',
+  backToBlog: 'Zurück zum Blog',
+  published: 'Veröffentlicht',
+  updated: 'Aktualisiert',
+  tags: 'Themen',
+  draftNotice: 'Entwurf · Nur in der lokalen Vorschau sichtbar.',
+} as const;

@@ -1,0 +1,15 @@
+export default {
+  skipToContent: 'Skip to content',
+  navigation: 'Main navigation',
+  languageNavigation: 'Choose language',
+  home: 'Home',
+  blog: 'Blog',
+  blogDescription: 'Technical writing and notes on software, systems and experiments.',
+  noPosts: 'No articles have been published here yet.',
+  rss: 'Subscribe via RSS',
+  backToBlog: 'Back to the blog',
+  published: 'Published',
+  updated: 'Updated',
+  tags: 'Topics',
+  draftNotice: 'Draft · Only visible in the local preview.',
+} as const;
