@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { homePaths } from '../i18n';
+---
+
+<BaseLayout
+  locale="de"
+  title="404 — Seite nicht gefunden / Page not found — neeklass"
+  description="Diese Seite existiert nicht. This page does not exist."
+  noindex
+>
+  <section class="not-found" aria-labelledby="not-found-title">
+    <h1 id="not-found-title">404</h1>
+    <p class="lead">
+      Diese Seite existiert nicht.<br />
+      <span lang="en">This page does not exist.</span>
+    </p>
+    <p class="back-home">
+      <a href={homePaths.de}>← Zur Startseite / <span lang="en">Back home</span></a>
+    </p>
+  </section>
+</BaseLayout>
+
+<style>
+  .not-found {
+    margin-block: clamp(3.5rem, 8vw, 6.5rem);
+  }
+
+  h1 {
+    margin-top: 0;
+  }
+
+  .back-home {
+    margin-top: var(--space-medium);
+    line-height: 1.6;
+  }
+</style>

@@ -2,7 +2,9 @@
 import '../styles/global.css';
 import ThemeControl from '../components/ThemeControl.astro';
 import GithubIcon from '../components/icons/GithubIcon.astro';
+import MailIcon from '../components/icons/MailIcon.astro';
 import RssIcon from '../components/icons/RssIcon.astro';
+import { BLOG_VISIBLE } from '../lib/features';
 import themeScript from '../scripts/theme.js?raw';
 import {
   blogPaths,
@@ -46,7 +48,7 @@ const year = new Date().getFullYear();
     <title>{title}</title>
     <meta name="description" content={description} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
-    <link rel="alternate" type="application/rss+xml" title={`${ui.blog} — neeklass (${locale})`} href={new URL(`${blogPaths[locale]}rss.xml`, Astro.site)} />
+    {BLOG_VISIBLE && <link rel="alternate" type="application/rss+xml" title={`${ui.blog} — neeklass (${locale})`} href={new URL(`${blogPaths[locale]}rss.xml`, Astro.site)} />}
     <link rel="canonical" href={canonical} />
     {alternates.map(({ language, url }) => (
       <link rel="alternate" hreflang={language} href={url} />
@@ -76,9 +78,11 @@ const year = new Date().getFullYear();
       <header class="site-header">
         <a class="brand" href={homePaths[locale]} aria-label={`neeklass — ${ui.home}`}>neeklass<span class="brand-alias" aria-hidden="true">Niklas</span></a>
         <div class="header-navigation">
-          <nav class="primary-navigation" aria-label={ui.navigation}>
-            <a href={blogPaths[locale]} aria-current={Astro.url.pathname === blogPaths[locale] ? 'page' : undefined}>{ui.blog}</a>
-          </nav>
+          {BLOG_VISIBLE && (
+            <nav class="primary-navigation" aria-label={ui.navigation}>
+              <a href={blogPaths[locale]} aria-current={Astro.url.pathname === blogPaths[locale] ? 'page' : undefined}>{ui.blog}</a>
+            </nav>
+          )}
           <nav class="language-switch" aria-label={ui.languageNavigation}>
             {alternates.map(({ language }) => (
               <a
@@ -102,7 +106,8 @@ const year = new Date().getFullYear();
         <span>© {year} Niklas Dittmann</span>
         <div class="footer-links">
           <a class="icon-control" href="https://github.com/Neeklass" rel="me" aria-label="GitHub" title="GitHub"><GithubIcon /></a>
-          <a class="icon-control" href={`${blogPaths[locale]}rss.xml`} aria-label={ui.rssSubscribe} title={ui.rssSubscribe}><RssIcon /></a>
+          <a class="icon-control" href="mailto:mail@neeklass.dev" aria-label={ui.sendEmail} title={ui.sendEmail}><MailIcon /></a>
+          {BLOG_VISIBLE && <a class="icon-control" href={`${blogPaths[locale]}rss.xml`} aria-label={ui.rssSubscribe} title={ui.rssSubscribe}><RssIcon /></a>}
         </div>
       </footer>
     </div>

@@ -3,6 +3,7 @@ export default {
   navigation: 'Main navigation',
   languageNavigation: 'Choose language',
   home: 'Home',
+  sendEmail: 'Send email',
   blog: 'Blog',
   blogDescription: 'Technical writing and notes on software, systems and experiments.',
   noPosts: 'No articles have been published here yet.',

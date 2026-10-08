@@ -11,8 +11,8 @@ inside `main`, with generous whitespace and the shared navigation and footer.
 Do not add positioning copy, portfolio sections, project placeholders, experience
 placeholders or biography until real content and a deliberate content decision
 exist. The site should gain substance through genuine writing and real work;
-the blog is currently the primary place for that content. Homepage metadata
-remains neutral and locale-aware.
+the blog is ready for that content but temporarily hidden from the shared UI.
+Homepage metadata remains neutral and locale-aware.
 
 ## Architecture
 
@@ -28,7 +28,7 @@ server, CMS, database or hosting migration is needed.
 | Area | German | English | Status |
 | --- | --- | --- | --- |
 | Home | `/` | `/en/` | Implemented |
-| Blog | `/blog/` | `/en/blog/` | Implemented |
+| Blog | `/blog/` | `/en/blog/` | Implemented; temporarily hidden from shared UI |
 | Article | `/blog/[slug]/` | `/en/blog/[slug]/` | Generated from Markdown |
 | RSS | `/blog/rss.xml` | `/en/blog/rss.xml` | Implemented |
 | Projects | `/projects/`, `/projects/[slug]/` | `/en/projects/`, `/en/projects/[slug]/` | Planned |
@@ -38,6 +38,11 @@ server, CMS, database or hosting migration is needed.
 Directory routes use trailing slashes, matching the static HTML generated for
 GitHub Pages. Only implemented destinations appear in navigation. The blog has
 an honest empty state until real articles are published; test drafts are hidden.
+
+`BLOG_VISIBLE` in `src/lib/features.ts` is currently `false`. Set it to `true`
+and rebuild when real articles are published to restore the header Blog link,
+footer RSS icon and RSS autodiscovery. Routes, article generation, translations,
+draft handling and feeds remain intact and directly accessible in either state.
 
 `blog.neeklass.dev` and `cv.neeklass.dev` may someday be vanity redirects to
 `/blog/` and `/cv/`. They are not required sites or deployments. No redirects or
@@ -79,10 +84,12 @@ src/components/BlogIndex.astro Shared index presentation
 src/i18n/                    Shared UI labels, locale types and section paths
 src/lib/blog.ts              Published-post queries, route and translation resolution
 src/lib/rss.ts               Shared static feed generation
+src/lib/features.ts          Blog visibility in the shared UI
 src/layouts/BaseLayout.astro  Document metadata and shared page shell
 src/layouts/ArticleLayout.astro Article metadata and Markdown body
 src/pages/index.astro        German homepage content
 src/pages/en/index.astro     English homepage content
+src/pages/404.astro          Bilingual GitHub Pages error page
 src/pages/{blog,en/blog}/    Blog indexes, article routes and RSS endpoints
 src/styles/global.css       Tokens, layout and light/dark/system themes
 src/styles/blog.css          Reading layout, Markdown and code styles
@@ -124,8 +131,9 @@ and `color-scheme`. Syntax highlighting follows the same selected scheme.
 No theme library, animation, network request or framework is involved.
 
 Use text for primary navigation and icons only for utilities or external profiles.
-GitHub and the current language's RSS feed are inline SVG footer links with
+GitHub and email (`mailto:mail@neeklass.dev`) are inline SVG footer links with
 accessible labels, tooltips, `currentColor`, visible focus and 44px hit areas.
+The current language's RSS icon appears after email when `BLOG_VISIBLE` is enabled.
 Their small local components live in `src/components/icons/`. No icon library
 is installed. Reuse `.editorial-meta` for quiet monospace metadata and use rules,
 spacing and typography for hierarchy rather than cards or decorative elements.
@@ -148,7 +156,7 @@ The layout sets document language, canonical URL, Open Graph locale and alternat
 locales. `x-default` points to the German counterpart when one exists. Canonical
 and alternate URLs use the configured production `site`, including in local
 previews. The brand returns to the current language’s homepage; the footer links
-to GitHub and the current language’s RSS feed.
+to GitHub, email and, when enabled, the current language’s RSS feed.
 Language selection uses ordinary HTML links without cookies, JavaScript,
 automatic translation or browser-language redirects.
 
@@ -265,7 +273,8 @@ or diagrams. There is no extra metadata, package or browser computation.
 Each feed contains only published posts in its language, with absolute canonical
 article URLs, titles, descriptions, dates and tags. Feeds intentionally contain
 summaries rather than full HTML bodies. They remain valid when empty. Each blog
-index links to its feed; document heads support RSS autodiscovery.
+index links to its feed; document heads expose RSS autodiscovery only when
+`BLOG_VISIBLE` is enabled.
 
 `getPublishedPosts(locale)` from `src/lib/blog.ts` returns newest-first posts with
 resolved `locale`, `slug` and `url`, excluding drafts in all environments. It can
@@ -275,7 +284,8 @@ shows only the name; do not add excerpts or placeholders automatically.
 ## Incremental roadmap
 
 The bilingual foundation and blog/RSS are implemented. The homepage is
-intentionally limited to the name; Blog remains in the shared navigation.
+intentionally limited to the name; Blog is hidden from shared navigation until
+real articles are published.
 
 1. Keep the homepage minimal. Add content or areas only when real material and
    a deliberate content decision exist; expose navigation when destinations are
@@ -299,6 +309,11 @@ Pushing to `main` automatically checks, builds and deploys `dist/` with official
 GitHub Actions. You can also run **Deploy to GitHub Pages** manually from the
 Actions tab on `main`. Deployment uses the `github-pages` environment and a
 Pages artifact, without a `gh-pages` branch. Deployments are serialized.
+
+`src/pages/404.astro` produces `dist/404.html`, the single custom error page used
+by GitHub Pages for missing URLs. It reuses the shared layout, shows concise German
+and English text with a link to `/`, and includes `noindex` metadata. It uses no
+locale detection or additional JavaScript and is not linked from normal navigation.
 
 ### In this repository
 
