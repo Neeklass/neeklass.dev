@@ -1,0 +1,29 @@
+{
+  "slug": "sample-project",
+  "project_number": "001",
+  "title": "Sample Project",
+  "subtitle": "A concise description of the actual project.",
+  "categories": [
+    "Software",
+    "Data",
+    "API"
+  ],
+  "stages": [
+    {
+      "label": "Inputs",
+      "description": "Verified sources"
+    },
+    {
+      "label": "Processing",
+      "description": "Actual pipeline"
+    },
+    {
+      "label": "Service",
+      "description": "Exposed API"
+    },
+    {
+      "label": "Users",
+      "description": "Public interface"
+    }
+  ]
+}

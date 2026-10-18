@@ -2,7 +2,7 @@
 
 Niklas Dittmann’s personal technical home. A bilingual, static Astro site built with
 TypeScript and plain CSS. A small inline script handles appearance preferences;
-there are no external fonts or analytics. Light and dark themes default to the
+three OFL fonts are self-hosted and there are no external analytics. Light and dark themes default to the
 visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
 
@@ -13,6 +13,13 @@ placeholders or biography until real content and a deliberate content decision
 exist. The site should gain substance through genuine writing and real work;
 the blog is ready for that content but temporarily hidden from the shared UI.
 Homepage metadata remains neutral and locale-aware.
+
+
+## Brand and design system
+
+The visual identity uses the custom-outlined `neeklass.` wordmark, the compact `n.` monogram, and a restrained **Editorial × Engineering** design language. Theme-aware colors live in `src/styles/global.css`. Familjen Grotesk (UI), Literata (editorial), and IBM Plex Mono (technical labels) are self-hosted in `public/fonts/` under SIL Open Font Licenses.
+
+See [the brand system](docs/brand-system.md) for exact colors, typography roles, mark usage and illustration rules. The editable [project-cover template](templates/project-cover/README.md) generates light/dark SVGs from project metadata without client-side scripts or extra dependencies. It is intentionally not a public portfolio section.
 
 ## Architecture
 
@@ -125,7 +132,7 @@ saved preferences. Invalid or inaccessible storage falls back to System; if
 saving is blocked, switching still works for the current page. Without JavaScript,
 the control stays hidden and CSS continues to follow the system preference.
 
-The unchanged warm/green palette is centralized in `src/styles/global.css` using
+The approved Pearl/Graphite/Cyan palette is centralized in `src/styles/global.css` using
 [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark)
 and `color-scheme`. Syntax highlighting follows the same selected scheme.
 No theme library, animation, network request or framework is involved.

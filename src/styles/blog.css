@@ -10,6 +10,7 @@
   margin-bottom: 2.5rem;
 }
 .blog-heading h1 {
+  font-family: var(--font-editorial);
   margin-top: 0;
 }
 .article-heading .lead {
@@ -48,6 +49,7 @@
   line-height: 1.8;
 }
 .post-list h2 {
+  font-family: var(--font-editorial);
   margin-block: 0.5rem;
   font-size: 1.5rem;
 }
@@ -89,6 +91,7 @@
   line-height: 1.7;
 }
 .prose {
+  font-family: var(--font-editorial);
   font-size: 1.0625rem;
   line-height: 1.8;
 }
@@ -96,6 +99,7 @@
   margin-block: 0 1.5rem;
 }
 .prose :is(h2, h3, h4, h5, h6) {
+  font-family: var(--font-editorial);
   margin-block: 2.5rem 1rem;
   font-weight: 600;
   line-height: 1.4;

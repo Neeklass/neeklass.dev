@@ -19,12 +19,12 @@ Let genuine writing and real work provide its substance.
 - German is the default public language. English pages live under `/en`.
 - Keep route names English (`/projects`, `/about`). Link real translations
   explicitly; never redirect based on browser language or translate at runtime.
-- Preserve the minimal editorial design, system fonts and system light/dark theme.
+- Preserve the minimal editorial layout and system-aware light/dark theme. Use the approved locally hosted typefaces and canonical vector marks from `docs/brand-system.md`.
 - Keep the visual language restrained and editorial. Use text for primary
   navigation and icons only for utilities or external profiles. Avoid generic
   AI/SaaS aesthetics, excessive cards, gradients, glass effects, terminal
   simulations and unnecessary animation.
-- Keep palette values in the shared CSS. Appearance defaults to System; manual
+- Keep semantic palette values in `src/styles/global.css`; reserve Apricot and Lavender for meaningful illustrations. Appearance defaults to System; manual
   Light/Dark choices persist locally. The theme control is the only client-side
   script. Maintain its pre-paint initialization and no-JavaScript system fallback.
 - Keep Astro, TypeScript, plain CSS and static output. Prefer HTML and avoid
@@ -47,3 +47,6 @@ Let genuine writing and real work provide its substance.
 - Run `npm run check` and `npm run build` before completing implementation work.
 
 The README records current scope, locale conventions and the next phases.
+
+- Keep brand notes and project-cover configurations in English. The site itself remains bilingual, with German as the default public language.
+- Project-cover rendering is offline, editable SVG tooling; do not imply a sample diagram is a shipped product feature.
