@@ -25,8 +25,9 @@ Let genuine writing and real work provide its substance.
   AI/SaaS aesthetics, excessive cards, gradients, glass effects, terminal
   simulations and unnecessary animation.
 - Keep semantic palette values in `src/styles/global.css`; reserve Apricot and Lavender for meaningful illustrations. Appearance defaults to System; manual
-  Light/Dark choices persist locally. The theme control is the only client-side
-  script. Maintain its pre-paint initialization and no-JavaScript system fallback.
+  Light/Dark choices persist locally. Keep the theme control's pre-paint
+  initialization and no-JavaScript system fallback. The Hidden Signature adds
+  only local interaction handling in its reusable Astro component.
 - Keep Astro, TypeScript, plain CSS and static output. Prefer HTML and avoid
   client-side JavaScript unless it provides meaningful functionality.
 - Do not add a frontend framework, CMS, database or dependencies without a

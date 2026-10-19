@@ -1,7 +1,7 @@
 # neeklass.dev
 
 Niklas Dittmann’s personal technical home. A bilingual, static Astro site built with
-TypeScript and plain CSS. A small inline script handles appearance preferences;
+TypeScript and plain CSS. Small scripts handle appearance and the Hidden Signature;
 three OFL fonts are self-hosted and there are no external analytics. Light and dark themes default to the
 visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
@@ -123,7 +123,7 @@ The appearance button cycles **System → Light → Dark → System** (German:
 the current mode and next action; changes are also announced by a status region.
 It supports keyboard activation with Enter or Space and a visible focus outline.
 
-`src/scripts/theme.js` is the only client-side script. It runs inline in the head
+`src/scripts/theme.js` handles appearance. It runs inline in the head
 to apply `data-theme` before first paint, then connects the control when the DOM
 is ready. Manual `light` / `dark` choices use the `neeklass-theme` localStorage
 key. Choosing System removes the key. System mode follows OS/browser changes
@@ -135,7 +135,13 @@ the control stays hidden and CSS continues to follow the system preference.
 The approved Pearl/Graphite/Cyan palette is centralized in `src/styles/global.css` using
 [`light-dark()`](https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Values/color_value/light-dark)
 and `color-scheme`. Syntax highlighting follows the same selected scheme.
-No theme library, animation, network request or framework is involved.
+No theme library, network request or framework is involved.
+
+The shared footer and bilingual 404 page use the approved v8 Hidden Signature:
+an `n.` monogram reveals a geometric illustration on hover, focus or activation.
+`src/components/HiddenMarkEasterEgg.astro` shares both variants, scoped CSS
+transitions and a small interaction script. See [the brand system](docs/brand-system.md#hidden-signature)
+for construction, themes, accessibility and reuse rules.
 
 Use text for primary navigation and icons only for utilities or external profiles.
 GitHub and email (`mailto:mail@neeklass.dev`) are inline SVG footer links with
@@ -320,7 +326,8 @@ Pages artifact, without a `gh-pages` branch. Deployments are serialized.
 `src/pages/404.astro` produces `dist/404.html`, the single custom error page used
 by GitHub Pages for missing URLs. It reuses the shared layout, shows concise German
 and English text with a link to `/`, and includes `noindex` metadata. It uses no
-locale detection or additional JavaScript and is not linked from normal navigation.
+locale detection and is not linked from normal navigation. Its Hidden Signature
+shares the same interaction script as the footer.
 
 ### In this repository
 

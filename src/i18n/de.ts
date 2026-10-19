@@ -4,6 +4,7 @@ export default {
   languageNavigation: 'Sprache wählen',
   home: 'Startseite',
   sendEmail: 'E-Mail senden',
+  hiddenSignature: 'Versteckte Signatur',
   blog: 'Blog',
   blogDescription: 'Technische Artikel und Notizen zu Software, Systemen und Experimenten.',
   noPosts: 'Hier sind noch keine Artikel veröffentlicht.',

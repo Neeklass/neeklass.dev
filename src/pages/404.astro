@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
 import { homePaths } from '../i18n';
 ---
 
@@ -10,20 +11,29 @@ import { homePaths } from '../i18n';
   noindex
 >
   <section class="not-found" aria-labelledby="not-found-title">
-    <h1 id="not-found-title">404</h1>
-    <p class="lead">
-      Diese Seite existiert nicht.<br />
-      <span lang="en">This page does not exist.</span>
-    </p>
-    <p class="back-home">
-      <a href={homePaths.de}>← Zur Startseite / <span lang="en">Back home</span></a>
-    </p>
+    <div class="not-found-copy">
+      <h1 id="not-found-title">404</h1>
+      <p class="lead">
+        Diese Seite existiert nicht.<br />
+        <span lang="en">This page does not exist.</span>
+      </p>
+      <p class="back-home">
+        <a href={homePaths.de}>← Zur Startseite / <span lang="en">Back home</span></a>
+      </p>
+    </div>
+    <HiddenMarkEasterEgg variant="404" />
   </section>
 </BaseLayout>
 
 <style>
   .not-found {
     margin-block: clamp(3.5rem, 8vw, 6.5rem);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-medium);
+    max-width: 46rem;
   }
 
   h1 {

@@ -16,7 +16,7 @@ Version: 1.0 (October 2026). Implementation reference for neeklass.dev.
 - The Cyan signature dot is intentionally prominent, close to the letter; in the monogram it sits optically near the right foot of `n`. It is not a separate app icon.
 - The canonical assets are `public/brand/wordmark-{light,dark}.svg`, `monogram-{light,dark}.svg` and `public/favicon.svg`. Use these instead of typing the wordmark in a web font.
 - Light artwork: Graphite lettering + dark teal dot. Dark artwork: Pearl lettering + Cyan dot.
-- Do not stretch, outline, add gradients, glow, shadow or animate the mark. Keep quiet surrounding space. Monochrome outputs may be derived for one-color printing.
+- Do not stretch, outline, add gradients, glow or shadow to the mark. Animation is limited to the approved [Hidden Signature](#hidden-signature) below; the primary wordmark and favicon remain static. Keep quiet surrounding space. Monochrome outputs may be derived for one-color printing.
 
 ## Palette
 
@@ -83,3 +83,90 @@ The default canvas is **1200 × 630** for Open Graph and link previews. Each con
 ## Implementation & status
 
 The SVG wordmark and monogram and the palette were approved visually. Typography/color integration and the first reusable cover generator are version 1 implementation, still subject to real-device QA. Fine details like long-title line breaking and 16-pixel favicon antialiasing should be revisited only with concrete test evidence.
+
+## Hidden Signature
+
+The Hidden Signature is a quiet personal detail: the canonical `n.` monogram
+reveals an approved geometric, Protogen-inspired symbol. It is not a replacement
+for the primary wordmark or favicon. Keep homepage content, editorial typography,
+navigation and existing utility links intact. Do not add captions or decoration.
+
+### Approved artwork and placement
+
+The supplied `neeklass-hidden-mark-v8` package is the artwork source of truth:
+`HiddenMarkEasterEgg.astro`, `footer-preview.html` and `404-preview.html`.
+Retain its vector letter, silhouette, coordinates, stroke widths and layer order.
+Do not redraw the illustration or add detail.
+
+- The shared footer uses a 52px square, simplified ears and a stronger eye stroke,
+  without inner-ear shading or a mouth. It sits before the existing utility links.
+- The bilingual 404 page uses a 180px square with both ear shading and the stepped
+  mouth. It accompanies the existing text in a wrapping editorial layout.
+
+Both instances reserve their dimensions before interaction; animation never
+changes page layout. Buttons have a minimum 44px hit area. The SVG scales uniformly
+within its square view box and fits the available width.
+
+### SVG construction
+
+The orb has center `(301, 281)` and radius `114`. One geometry definition drives
+its fill, last-painted outline and concentric face clipping region, inset by `8`
+units (radius `106`), exactly as in v8. The eye and mouth are children of that clip.
+The entire group translates and scales uniformly from the original dot at
+`(405, 367)`, radius `24`. Never scale its axes independently, morph it into a
+polygon, or animate the facial details separately from the orb's coordinate space.
+
+Closed ears and the reduced `<` bracket render behind the circular side module,
+which sits below the ears and behind the main orb. The bracket closes underneath
+the module's opaque fill, preserving the approved visible contour without exposed
+endpoints. The eye and mouth intentionally remain clipped open strokes.
+Each component instance receives a unique clip ID so both variants can coexist.
+
+### Theme tokens
+
+All palette values live in `src/styles/global.css`:
+
+| Token | Light | Dark |
+| --- | --- | --- |
+| `--background` | `#EEE5E9` | `#252B29` |
+| `--foreground` | `#383D3B` | `#EEE5E9` |
+| `--accent` | `#0B6972` | `#52DEE5` |
+| `--brand-ice` (ear shading) | `#92DCE5` | `#92DCE5` |
+
+The mark consumes these shared tokens; facial strokes use the background color.
+Existing `color-scheme`, `light-dark()` and `data-theme` rules resolve System,
+Light and Dark immediately. Keep pre-paint initialization and storage behavior
+in `src/scripts/theme.js` unchanged. No component JavaScript detects theme state.
+
+### Animation and accessibility
+
+The letter fades over 180ms; the dot translates and uniformly enlarges over 560ms
+with the approved restrained easing. Rear geometry begins after 80ms; the outline
+and facial details appear last, completing at 570ms. Closing smoothly reverses
+from the current interpolated values, with no opening delays. Reduced motion
+removes all transitions while retaining every interaction.
+
+Mouse entry reveals; exit restores the monogram unless keyboard focus remains.
+Keyboard focus reveals; native Enter and Space activation toggle. Touch taps
+toggle without synthetic hover. An outside pointer press or focus leaving closes;
+Escape closes even while hovered and never removes keyboard focus. Re-entry or
+activation can reveal again. The localized, stable button name and `aria-pressed`
+describe the current reveal state, including hover and focus. The decorative SVG
+is hidden from assistive technology. Visible focus remains available when closed.
+Without JavaScript, a disabled button preserves the static monogram and dimensions.
+
+### Reuse
+
+```astro
+---
+import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
+---
+<HiddenMarkEasterEgg variant="footer" locale="en" />
+<HiddenMarkEasterEgg variant="404" size={180} locale="de" />
+```
+
+`variant` is required; `size` defaults to 52 or 180 CSS pixels. `locale` defaults
+to German. Pass the shared layout's locale to its footer. Current use is limited
+to the shared footer and existing 404 page; do not introduce additional placements
+without a deliberate content decision. No framework, dependency or runtime
+network request is required.
