@@ -1,0 +1,132 @@
+.case-study,
+.projects-index {
+  padding-block: clamp(3rem, 7vw, 5rem);
+  overflow-wrap: anywhere;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+}
+.reading-column {
+  width: min(100%, 44rem);
+  margin-inline: auto;
+}
+.project-heading h1,
+.projects-index h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  line-height: 1.2;
+}
+.project-heading .lead {
+  max-width: none;
+  margin-block: 1.5rem;
+}
+.project-heading p + p {
+  margin-top: 1.25rem;
+}
+.case-study a,
+.project-list h2 a {
+  color: var(--accent);
+}
+.case-study .back-link,
+.project-footer {
+  font-size: 0.875rem;
+}
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin-block: 1.5rem;
+  font-size: 0.9375rem;
+}
+.project-section {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.project-section h2 {
+  margin-block: 0.5rem 1.5rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  line-height: 1.35;
+}
+.project-section h3 {
+  margin-block: 0 0.75rem;
+  font-family: var(--font-editorial);
+  font-size: 1.25rem;
+  font-weight: 500;
+  line-height: 1.45;
+}
+.project-section p + p {
+  margin-top: 1.25rem;
+}
+.project-section .source-heading {
+  margin-top: 2rem;
+}
+.architecture-figure {
+  width: min(100%, 52rem);
+  margin: 2rem auto 0;
+}
+.case-study figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+}
+.case-study figcaption p {
+  margin-block: 0.5rem;
+}
+.comparison {
+  display: grid;
+  gap: 3rem;
+  margin-top: 2rem;
+}
+.comparison > section {
+  min-width: 0;
+}
+.project-figure {
+  margin: 1.5rem 0 0;
+}
+.project-figure .figure-image {
+  display: block;
+}
+.project-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+}
+.project-figure figcaption {
+  max-width: 44rem;
+}
+.project-footer {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border);
+}
+.project-list {
+  padding: 0;
+  margin-top: 2.5rem;
+  list-style: none;
+}
+.project-list li {
+  border-top: 1px solid var(--border);
+  padding-block: 2rem;
+}
+.project-list h2 {
+  margin-block: 0.5rem 1rem;
+  font-size: 1.75rem;
+}
+/* Full-window screenshots need wide columns for their original text to remain readable. */
+@media (min-width: 112rem) {
+  .comparison {
+    width: min(106rem, calc(100vw - 2 * var(--page-gutter)));
+    margin-left: 50%;
+    transform: translateX(-50%);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 2rem;
+  }
+  .comparison > section {
+    display: grid;
+    grid-template-rows: subgrid;
+    grid-row: span 2;
+  }
+}

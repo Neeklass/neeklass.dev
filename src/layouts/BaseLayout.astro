@@ -10,6 +10,7 @@ import themeScript from '../scripts/theme.js?raw';
 import {
   blogPaths,
   homePaths,
+  projectPaths,
   labels,
   languageNames,
   locales,
@@ -84,11 +85,12 @@ const year = new Date().getFullYear();
           <span class="brand-alias" aria-hidden="true">Niklas</span>
         </a>
         <div class="header-navigation">
-          {BLOG_VISIBLE && (
-            <nav class="primary-navigation" aria-label={ui.navigation}>
+          <nav class="primary-navigation" aria-label={ui.navigation}>
+            <a href={projectPaths[locale]} aria-current={Astro.url.pathname === projectPaths[locale] ? 'page' : Astro.url.pathname.startsWith(projectPaths[locale]) ? 'location' : undefined}>{ui.projects}</a>
+            {BLOG_VISIBLE && (
               <a href={blogPaths[locale]} aria-current={Astro.url.pathname === blogPaths[locale] ? 'page' : undefined}>{ui.blog}</a>
-            </nav>
-          )}
+            )}
+          </nav>
           <nav class="language-switch" aria-label={ui.languageNavigation}>
             {alternates.map(({ language }) => (
               <a

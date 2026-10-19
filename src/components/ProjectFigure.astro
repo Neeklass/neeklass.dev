@@ -1,0 +1,24 @@
+---
+import { labels, type Locale } from '../i18n';
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  number: string;
+  locale: Locale;
+}
+const { src, alt, width, height, number, locale } = Astro.props;
+---
+
+<figure class="project-figure">
+  <a class="figure-image" href={src}>
+    <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+  </a>
+  <figcaption>
+    <span class="editorial-meta">FIG. {number}</span>
+    <slot />
+    <a href={src}>{labels[locale].openFullImage}</a>
+  </figcaption>
+</figure>

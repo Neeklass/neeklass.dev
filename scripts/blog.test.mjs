@@ -74,7 +74,8 @@ test('static blog publication, translation links, RSS and draft isolation', { ti
     assert.match(german, /alt="Test diagram"/);
     assert.doesNotMatch(german, /noindex/);
     const pageScripts = [...german.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
-    assert.equal(pageScripts.length, 1, 'Only the theme control needs client-side JavaScript');
+    const sharedScripts = [...(await html('')).matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
+    assert.deepEqual(pageScripts.map(match => match[0]), sharedScripts.map(match => match[0]), 'Articles must use only the shared theme and Hidden Signature scripts');
     assert.equal(pageScripts[0][1].trim(), (await readFile(join(root, 'src/scripts/theme.js'), 'utf8')).trim());
     assert.match(german, /1 Min\. Lesezeit/);
     assert.match(english, /1 min read/);

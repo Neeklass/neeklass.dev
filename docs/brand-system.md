@@ -71,6 +71,25 @@ Three website text families are self-hosted in `public/fonts/` with their origin
 - Not every project should have the same four-node pipeline. A project-specific illustration is preferable to a diagram that misrepresents functionality.
 - Label conceptual architecture as conceptual. Do not imply implementations or features that are not real.
 
+## Project case-study figures
+
+Use Literata for project and section headings, Familjen Grotesk for prose, and
+IBM Plex Mono for quiet section and figure labels. Keep prose within 44rem;
+figures can use the wider shared shell. Use whitespace and horizontal rules.
+
+Schleswig MCP uses the approved static architecture SVGs unchanged, with CSS
+switching for System, Light and Dark. Only the active illustration and full-size
+link are exposed to assistive technology. Preserve the vertical aspect ratio;
+on small screens use horizontal scrolling and a full-size link to keep labels
+readable. Mermaid sources remain development documentation, not browser assets.
+
+Genuine Claude screenshots retain their original colors and full context in
+both page themes. Never recolor, darken, fabricate or crop away source notes.
+Intrinsic dimensions reserve layout space. Provide translated alt text, visible
+captions and ordinary full-size links. Stack the comparison at normal widths;
+use equal columns only on wide screens (112rem and above). The chart has its own
+wide figure, with the original axis limitations stated in its caption.
+
 ## Reusable project cover
 
 The source-controlled generator and neutral editable configuration live at:

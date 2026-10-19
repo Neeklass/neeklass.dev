@@ -1,0 +1,68 @@
+---
+interface Props {
+  light: string;
+  dark: string;
+  alt: string;
+  width: number;
+  height: number;
+  openLabel: string;
+  scrollLabel: string;
+}
+const { light, dark, alt, width, height, openLabel, scrollLabel } = Astro.props;
+---
+
+<div class="theme-illustration">
+  <p class="scroll-hint">{scrollLabel}</p>
+  {[{ mode: 'light', src: light }, { mode: 'dark', src: dark }].map(({ mode, src }) => (
+    <div class:list={['illustration-variant', `illustration-variant--${mode}`]}>
+      <div class="illustration-scroll" tabindex="0" role="region" aria-label={scrollLabel}>
+        <a href={src}>
+          <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
+        </a>
+      </div>
+      <a class="full-image-link" href={src}>{openLabel}</a>
+    </div>
+  ))}
+</div>
+
+<style>
+  .scroll-hint {
+    display: none;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+  @media (max-width: 48rem) {
+    .scroll-hint { display: block; }
+  }
+  .illustration-variant--dark { display: none; }
+  :global(:root[data-theme="dark"]) .illustration-variant--light { display: none; }
+  :global(:root[data-theme="dark"]) .illustration-variant--dark { display: block; }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"]):not([data-theme="dark"])) .illustration-variant--light { display: none; }
+    :global(:root:not([data-theme="light"]):not([data-theme="dark"])) .illustration-variant--dark { display: block; }
+  }
+
+  .illustration-scroll {
+    overflow-x: auto;
+  }
+  .illustration-scroll a {
+    display: block;
+    min-width: 44rem;
+  }
+  .illustration-scroll a:focus-visible {
+    outline-offset: -3px;
+  }
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  .full-image-link {
+    display: inline-block;
+    margin-block: 0.75rem;
+    color: var(--accent);
+    font-size: 0.875rem;
+  }
+</style>

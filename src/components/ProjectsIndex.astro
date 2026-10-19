@@ -1,0 +1,26 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { labels, projectPaths, type Locale } from '../i18n';
+import '../styles/projects.css';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const ui = labels[locale];
+const summary = {
+  de: 'Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen. Eine REST-API und ein MCP-Server mit gemeinsamer Anwendungslogik, fünf aufbereiteten Snapshots und einem Live-Wasserstand.',
+  en: 'Making local open data accessible to applications and AI assistants. A REST API and an MCP server with shared application logic, five curated snapshots, and one live water-level integration.',
+};
+---
+
+<BaseLayout locale={locale} title={`${ui.projects} — neeklass`} description={ui.projectsDescription} translations={projectPaths}>
+  <section class="projects-index reading-column" aria-labelledby="projects-title">
+    <h1 id="projects-title">{ui.projects}</h1>
+    <ul class="project-list">
+      <li>
+        <p class="editorial-meta">Open Data / REST / MCP</p>
+        <h2><a href={`${projectPaths[locale]}schleswig-mcp/`}>Schleswig MCP</a></h2>
+        <p>{summary[locale]}</p>
+      </li>
+    </ul>
+  </section>
+</BaseLayout>

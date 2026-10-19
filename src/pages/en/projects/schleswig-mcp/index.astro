@@ -1,0 +1,89 @@
+---
+import ProjectLayout from '../../../../layouts/ProjectLayout.astro';
+import ThemeIllustration from '../../../../components/ThemeIllustration.astro';
+import ProjectFigure from '../../../../components/ProjectFigure.astro';
+import { labels } from '../../../../i18n';
+
+const ui = labels.en;
+const imageBase = '/images/projects/schleswig-mcp';
+const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schleswig-mcp/' };
+---
+
+<ProjectLayout locale="en" title="Schleswig MCP" description="Making local open data accessible to applications and AI assistants." translations={translations}>
+  <Fragment slot="introduction">
+    <p>Public information about Schleswig is distributed across different publishers, formats, and publication cycles. Schleswig MCP combines selected local datasets behind a consistent REST API and a remote Model Context Protocol (MCP) server, both backed by shared application logic.</p>
+    <ul class="project-links">
+      <li><a href="https://schleswig-mcp-data-seven.vercel.app/">Live project</a></li>
+      <li><a href="https://schleswig-mcp-data-seven.vercel.app/docs">REST reference</a></li>
+      <li><a href="https://schleswig-mcp-data-seven.vercel.app/mcp-docs">MCP documentation</a></li>
+      <li><a href="https://github.com/Neeklass/schleswig-mcp">Source code</a></li>
+    </ul>
+    <p class="editorial-meta">6 datasets · 5 curated snapshots · 1 live water-level integration</p>
+  </Fragment>
+
+  <section class="project-section" aria-labelledby="architecture-title">
+    <div class="reading-column">
+      <p class="editorial-meta">01 — System architecture</p>
+      <h2 id="architecture-title">One data foundation, two interfaces</h2>
+      <p>The REST API and MCP server share domain functions, source adapters, validation, and consistent data models. Five datasets are curated snapshots packaged with the application. The water-level endpoint is the exception: it queries an external provider at request time.</p>
+    </div>
+    <figure class="architecture-figure">
+      <ThemeIllustration light={`${imageBase}/mcp-architecture-light.svg`} dark={`${imageBase}/mcp-architecture-dark.svg`} width={1100} height={1510} alt="Diagram of Schleswig MCP: web apps access the REST API and AI assistants use MCP. Both use shared logic, processing, curated data, and a live external provider." openLabel={ui.openFullImage} scrollLabel={ui.diagramScroll} />
+      <figcaption><span class="editorial-meta">FIG. 01</span><p><strong>Schleswig MCP system architecture.</strong> Two client interfaces share application logic and data processing. The diagram distinguishes prepared local datasets from live external requests.</p></figcaption>
+    </figure>
+  </section>
+
+  <section class="project-section" aria-labelledby="comparison-title">
+    <div class="reading-column">
+      <p class="editorial-meta">02 — Demonstration: without versus with MCP</p>
+      <h2 id="comparison-title">From general inference to dataset-backed answers</h2>
+      <p>I asked Claude the same question about Schleswig's population projections for 2020–2040 with and without access to the Schleswig MCP integration. The comparison illustrates a difference in accessible source material, not a controlled benchmark of general model accuracy.</p>
+    </div>
+    <div class="comparison">
+      <section aria-labelledby="without-title">
+        <div class="reading-column">
+          <h3 id="without-title">Without Schleswig MCP</h3>
+          <p>Without the MCP tool, Claude used web search and could not locate a precise city-level forecast for the requested period. It presented regional context and clearly stated that its conclusion was an inference rather than a verified projection for Schleswig.</p>
+        </div>
+        <ProjectFigure src={`${imageBase}/claude-no-mcp.png`} width={1577} height={1175} number="02" locale="en" alt="Claude answering a Schleswig population forecast question without MCP, explaining that it cannot find a precise city-level projection.">
+          <p><strong>Without MCP.</strong> Claude cannot retrieve the requested local projection directly and returns a qualified, web-based inference.</p>
+        </ProjectFigure>
+      </section>
+      <section aria-labelledby="with-title">
+        <div class="reading-column">
+          <h3 id="with-title">With Schleswig MCP</h3>
+          <p>With the MCP integration available, Claude retrieved the project's structured population forecast data. It returned the recorded values for 2020, 2030, 2035 and 2040 and explained the model's projected pattern.</p>
+        </div>
+        <ProjectFigure src={`${imageBase}/claude-with-mcp.png`} width={1578} height={1175} number="03" locale="en" alt="Claude using Schleswig MCP to display a table of projected residents in 2020, 2030, 2035, and 2040.">
+          <p><strong>With Schleswig MCP.</strong> Claude uses the population forecast dataset to provide a concrete table and a source-grounded explanation. These are projections from the underlying publication, not live population counts.</p>
+        </ProjectFigure>
+      </section>
+    </div>
+  </section>
+
+  <section class="project-section" aria-labelledby="visualization-title">
+    <div class="reading-column">
+      <p class="editorial-meta">03 — Follow-up: visualization</p>
+      <h2 id="visualization-title">From structured data to a visual explanation</h2>
+      <p>Once the dataset is accessible through MCP, a follow-up request can turn the retrieved values into a table and chart. The same source data supports a different task without manually searching and extracting the original publication again.</p>
+    </div>
+    <ProjectFigure src={`${imageBase}/claude-data-visualization.png`} width={1577} height={1175} number="04" locale="en" alt="Claude showing a line chart of Schleswig population forecasts from 2020 to 2040 with visible limitations about axis spacing.">
+      <p><strong>Visualization using MCP data.</strong> Claude produces a chart from the retrieved population projections. Its accompanying explanation notes that year intervals in the original chart are not displayed proportionally and that the vertical axis starts at 25,000, which visually exaggerates changes.</p>
+    </ProjectFigure>
+  </section>
+
+  <section class="project-section" aria-labelledby="decisions-title">
+    <div class="reading-column">
+      <p class="editorial-meta">04 — Decisions and limitations</p>
+      <h2 id="decisions-title">Engineering choices and trade-offs</h2>
+      <p>The service separates data provenance and validation from the public protocols. REST and MCP call the same domain functions, while each transport handles its own input and output contracts. Source metadata documents licenses, reference dates, and known limitations.</p>
+      <p>Five datasets are curated snapshots and are not refreshed automatically. Only the water level is queried live; a gauge reading is not a flood warning or an assessment of swimming safety. The project emphasizes traceable access to public data rather than claiming that all available data is complete or current.</p>
+      <h3 class="source-heading">Data provenance and source dates</h3>
+      <p>The population projection shown comes from <a href="https://opendata.schleswig-holstein.de/dataset/bevolkerungsvorausberechnung-fur-schleswig-holstein-bis-2040">Wegweiser Kommune / Bertelsmann Stiftung (Open Data SH)</a>. Source metadata records publication on <time datetime="2025-03-21">21 March 2025</time> and modification on <time datetime="2025-06-04">4 June 2025</time>. These are not measurement or retrieval dates. The data combines historical inputs with projections through 2040; it does not represent current population counts.</p>
+      <p>The source is released under <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Original credits also name the statistical offices of the German states, the research data centers of the federal and state statistical offices, and Deenst GmbH. The <a href="https://github.com/Neeklass/schleswig-mcp/blob/main/docs/datasources/govdata.md">data-source documentation</a> explains preparation and known limitations; download and preparation timestamps are unknown.</p>
+      <p>Other sources include PEGELONLINE / WSV, LVermGeo SH, the monument register via Open Data SH, Sozialministerium S-H for bathing waters, and Bundesnetzagentur. Their respective <a href="https://github.com/Neeklass/schleswig-mcp#attribution-and-licensing">source credits and licenses</a> apply. Charging records do not show live availability, and registers are not necessarily exhaustive.</p>
+      <p>Screenshots: unaltered captures of Claude (Anthropic) from this project. The responses and chart still require review; MCP access does not guarantee correct AI answers.</p>
+      <p><strong>Independent project notice:</strong> Schleswig MCP is not operated or endorsed by the City of Schleswig.</p>
+    </div>
+  </section>
+</ProjectLayout>

@@ -38,7 +38,7 @@ server, CMS, database or hosting migration is needed.
 | Blog | `/blog/` | `/en/blog/` | Implemented; temporarily hidden from shared UI |
 | Article | `/blog/[slug]/` | `/en/blog/[slug]/` | Generated from Markdown |
 | RSS | `/blog/rss.xml` | `/en/blog/rss.xml` | Implemented |
-| Projects | `/projects/`, `/projects/[slug]/` | `/en/projects/`, `/en/projects/[slug]/` | Planned |
+| Projects | `/projects/`, `/projects/schleswig-mcp/` | `/en/projects/`, `/en/projects/schleswig-mcp/` | Implemented; Schleswig MCP case study |
 | About | `/about/` | `/en/about/` | Planned |
 | CV | `/cv/` | `/en/cv/` | Planned |
 
@@ -98,6 +98,9 @@ src/pages/index.astro        German homepage content
 src/pages/en/index.astro     English homepage content
 src/pages/404.astro          Bilingual GitHub Pages error page
 src/pages/{blog,en/blog}/    Blog indexes, article routes and RSS endpoints
+src/pages/{projects,en/projects}/ Project indexes and translated case studies
+src/layouts/ProjectLayout.astro Shared case-study shell
+src/styles/projects.css      Editorial project layout and figures
 src/styles/global.css       Tokens, layout and light/dark/system themes
 src/styles/blog.css          Reading layout, Markdown and code styles
 astro.config.mjs             Static output and production URL
@@ -172,6 +175,39 @@ previews. The brand returns to the current language’s homepage; the footer lin
 to GitHub, email and, when enabled, the current language’s RSS feed.
 Language selection uses ordinary HTML links without cookies, JavaScript,
 automatic translation or browser-language redirects.
+
+## Project case studies
+
+Projects are discoverable through the localized header link and `/projects/`
+or `/en/projects/`. The homepages remain name-only and `BLOG_VISIBLE` remains
+`false`. Schleswig MCP is the first documented project; there are no placeholders.
+
+The two `projects/schleswig-mcp/index.astro` pages hold the German and English
+editorial content separately, based on the supplied case-study copy. They use
+`ProjectLayout.astro`, `ProjectFigure.astro` and `ThemeIllustration.astro` without
+adding browser scripts or dependencies. The comparison remains stacked until
+112rem viewport width so the original screenshots have room for readable text.
+
+Approved SVGs and genuine screenshots are preserved byte-for-byte under
+`public/images/projects/schleswig-mcp/`; their full-size links open ordinary
+image documents. Editable Mermaid sources live under `docs/diagrams/` and are
+not shipped to browsers. Do not regenerate the approved SVG layout as part of
+a build. The diagram follows manual `data-theme` overrides and the system
+fallback through CSS, exposing only the active variant. At narrow widths it
+scrolls horizontally in a keyboard-focusable region instead of shrinking labels.
+
+Project facts were checked on 2026-10-19 against the
+[current project README](https://github.com/Neeklass/schleswig-mcp),
+[provider documentation](https://github.com/Neeklass/schleswig-mcp/blob/main/docs/datasources/govdata.md)
+and live REST responses. Keep five manually prepared snapshots distinct from
+the live PEGELONLINE integration. The population publication dates (2025-03-21,
+updated 2025-06-04) are source metadata, not measurement or retrieval dates.
+The population source link uses the official Open Data SH catalog record:
+the publisher URL recorded in the project metadata returned 404 during review.
+The Claude screenshots are an illustrative example, not an accuracy benchmark;
+keep their projection and chart-axis caveats, source credits and independence
+notice visible. A future engineering article is separate work; no blog draft or
+article link is included here.
 
 ## Writing and publishing
 
@@ -304,10 +340,9 @@ real articles are published.
    a deliberate content decision exist; expose navigation when destinations are
    available.
 2. Add real technical writing to the existing blog collection as it is ready.
-3. Add a project collection at `/projects/` and `/en/projects/`, an overview and
-   case studies explaining problems,
-   architecture, decisions, trade-offs and lessons with source links and useful
-   diagrams/screenshots.
+3. Extend the existing project indexes and bilingual case studies when more real
+   work is ready. Schleswig MCP documents architecture, evidence, trade-offs and
+   source limitations; introduce a collection only when the content needs one.
 4. Build `/cv/` and `/en/cv/` in this same app with structured German/English data
    (for example `src/data/cv/de.ts` and `en.ts`), a living web CV, print CSS and a
    PDF workflow derived from the same content where practical.

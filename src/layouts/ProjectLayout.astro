@@ -1,0 +1,28 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import { labels, projectPaths, type Locale, type PageTranslations } from '../i18n';
+import '../styles/projects.css';
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description: string;
+  translations: PageTranslations;
+}
+const { locale, title, description, translations } = Astro.props;
+---
+
+<BaseLayout locale={locale} title={`${title} — neeklass`} description={description} translations={translations}>
+  <article class="case-study" aria-labelledby="project-title">
+    <header class="project-heading reading-column">
+      <a class="back-link" href={projectPaths[locale]}>{labels[locale].backToProjects}</a>
+      <h1 id="project-title">{title}</h1>
+      <p class="lead">{description}</p>
+      <slot name="introduction" />
+    </header>
+    <slot />
+    <footer class="project-footer reading-column">
+      <a href={projectPaths[locale]}>{labels[locale].backToProjects}</a>
+    </footer>
+  </article>
+</BaseLayout>

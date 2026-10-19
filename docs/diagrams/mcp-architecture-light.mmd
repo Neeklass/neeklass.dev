@@ -1,0 +1,39 @@
+%% Schleswig MCP conceptual architecture (Light Mode)
+%% Source-of-truth logic: five curated snapshots, one live water-level provider.
+%%{init: {"theme": "base", "themeVariables": {"background": "#EEE5E9", "primaryTextColor": "#383D3B", "lineColor": "#383D3B", "fontFamily": "Familjen Grotesk, Arial, sans-serif", "clusterBkg": "#F8F5F6", "clusterBorder": "#CEC5CA", "edgeLabelBackground": "#EEE5E9"}}}%%
+flowchart TB
+    subgraph CLIENTS["Clients"]
+        APP["Web Apps & Services"]
+        AI["AI Assistants & Agents"]
+    end
+
+    subgraph PLATFORM["Schleswig MCP Platform"]
+        REST["REST API"]
+        MCP["MCP Server"]
+        CORE["Shared Application Logic"]
+        PROVIDERS["Data Processing & Validation"]
+        CACHE[("Structured Data")]
+    end
+
+    subgraph SOURCES["Public Open Data"]
+        STATIC["Open Data Datasets"]
+        LIVE["External APIs"]
+    end
+
+    APP -->|HTTP / JSON| REST
+    AI -->|Model Context Protocol| MCP
+    REST --> CORE
+    MCP --> CORE
+    CORE --> PROVIDERS
+    PROVIDERS --> CACHE
+    STATIC -.->|Data Preparation| CACHE
+    PROVIDERS -->|Live Requests| LIVE
+
+    classDef client fill:#DDF1F4,stroke:#0B6972,color:#383D3B,stroke-width:1.8px
+    classDef endpoint fill:#EBE5F4,stroke:#9077AA,color:#383D3B,stroke-width:1.8px
+    classDef core fill:#E2F0EC,stroke:#0B6972,color:#383D3B,stroke-width:1.8px
+    classDef data fill:#F7E8D6,stroke:#C8874D,color:#383D3B,stroke-width:1.8px
+    class APP,AI client
+    class REST,MCP endpoint
+    class CORE,PROVIDERS core
+    class CACHE,STATIC,LIVE data
