@@ -1,0 +1,118 @@
+---
+// Home recipe (docs/brand-system.md): Header · Homepage intro · Project list · Footer.
+// All copy is Niklas's; open items are placeholders that block production builds.
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Placeholder from './Placeholder.astro';
+import { homePaths, labels, projectPaths, type Locale } from '../i18n';
+
+interface Props { locale: Locale }
+const { locale } = Astro.props;
+const ui = labels[locale];
+
+const meta = {
+  de: { description: 'Die persönliche Website von Niklas Dittmann.' },
+  en: { description: 'The personal website of Niklas Dittmann.' },
+}[locale];
+
+const intro = {
+  de: 'Intro, 80–120 Wörter: woher du kommst (Enterprise-Anwendungen und Workflows), wohin du gehst (Softwareentwicklung, Data Engineering, KI), wie du arbeitest (KI-Werkzeuge ja, Entscheidungen und Review bei dir)',
+  en: 'Intro, 80–120 words: where you come from, where you are heading, how you work',
+}[locale];
+const nameLine = {
+  de: 'Eine Zeile: neeklass spricht man wie Niklas',
+  en: 'One line: neeklass is pronounced like Niklas',
+}[locale];
+
+interface HomeProject {
+  title: string;
+  /** Only when the project has its own page. */
+  href?: string;
+  /** Only when it differs from "own project". */
+  role?: string;
+  sentence?: string;
+  sentenceHint?: string;
+}
+
+// Up to four items.
+const projects: HomeProject[] = [
+  {
+    title: 'Schleswig MCP',
+    href: `${projectPaths[locale]}schleswig-mcp/`,
+    sentence: {
+      de: 'Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen.',
+      en: 'Making local open data accessible to applications and AI assistants.',
+    }[locale],
+  },
+  {
+    title: 'Eurofurence Creator System',
+    role: { de: 'Ehrenamtlich im Team', en: 'Volunteer developer' }[locale],
+    sentenceHint: {
+      de: 'Ein ehrlicher Satz zum Eurofurence Creator System (frühe Phase)',
+      en: 'One honest sentence about the Eurofurence Creator System (early stage)',
+    }[locale],
+  },
+];
+---
+
+<BaseLayout locale={locale} title="Niklas Dittmann — neeklass" description={meta.description} translations={homePaths}>
+  <section class="home-intro" aria-labelledby="home-title">
+    <h1 id="home-title">Niklas Dittmann</h1>
+    <p class="lead"><Placeholder hint={intro} /></p>
+    <p class="small home-name-note"><Placeholder hint={nameLine} /></p>
+  </section>
+
+  <section class="home-projects" aria-labelledby="home-projects-title">
+    <h2 id="home-projects-title">{ui.selectedProjects}</h2>
+    <ul>
+      {projects.map((project) => (
+        <li>
+          <h3>{project.href ? <a href={project.href}>{project.title}</a> : project.title}</h3>
+          <p>
+            {project.sentence ?? <Placeholder hint={project.sentenceHint ?? ''} />}
+            {project.role && <span class="small"> · {project.role}</span>}
+          </p>
+        </li>
+      ))}
+    </ul>
+  </section>
+</BaseLayout>
+
+<style>
+  .home-intro {
+    padding-block: var(--space-8) var(--space-6);
+  }
+  .home-name-note {
+    margin-top: var(--space-2);
+  }
+  .home-projects {
+    max-width: var(--reading-width);
+    margin-bottom: var(--space-8);
+    border-top: 1px solid var(--foreground);
+  }
+  .home-projects h2 {
+    margin: var(--space-2) 0 0;
+    font: 600 0.9375rem/1.6 var(--font-interface);
+  }
+  .home-projects ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+  }
+  .home-projects li {
+    padding-block: var(--space-4);
+  }
+  .home-projects li + li {
+    border-top: 1px solid var(--border);
+  }
+  .home-projects h3 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    line-height: 1.3;
+  }
+  .home-projects h3 a {
+    color: var(--accent);
+  }
+  .home-projects p {
+    margin-top: var(--space-1);
+    font: 400 0.9375rem/1.6 var(--font-interface);
+  }
+</style>

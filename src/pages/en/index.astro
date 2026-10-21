@@ -1,13 +1,4 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import { homePaths } from '../../i18n';
+import HomePage from '../../components/HomePage.astro';
 ---
-
-<BaseLayout
-  locale="en"
-  title="Niklas Dittmann — neeklass"
-  description="The personal website of Niklas Dittmann."
-  translations={homePaths}
->
-  <h1 class="home-name">Niklas Dittmann</h1>
-</BaseLayout>
+<HomePage locale="en" />

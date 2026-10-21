@@ -6,13 +6,12 @@ three OFL fonts are self-hosted and there are no external analytics. Light and d
 visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
 
-Both homepages intentionally contain only `Niklas Dittmann` in a single `h1`
-inside `main`, with generous whitespace and the shared navigation and footer.
-Do not add positioning copy, portfolio sections, project placeholders, experience
-placeholders or biography until real content and a deliberate content decision
-exist. The site should gain substance through genuine writing and real work;
-the blog is ready for that content but temporarily hidden from the shared UI.
-Homepage metadata remains neutral and locale-aware.
+Both homepages follow the "Home" recipe in [the brand system](docs/brand-system.md):
+the name in a single `h1`, Niklas's intro (80–120 words), one line explaining the
+name `neeklass`, and up to four selected projects. Copy follows
+[the content guide](docs/content-guide.md); open copy is marked with the
+`Placeholder` component, which blocks production builds until it is written.
+The blog is ready for content but temporarily hidden from the shared UI.
 
 
 ## Brand and design system
@@ -331,18 +330,16 @@ index links to its feed; document heads expose RSS autodiscovery only when
 
 `getPublishedPosts(locale)` from `src/lib/blog.ts` returns newest-first posts with
 resolved `locale`, `slug` and `url`, excluding drafts in all environments. It can
-support future writing sections if deliberately requested. The homepage currently
-shows only the name; do not add excerpts or placeholders automatically.
+support future writing sections if deliberately requested. The homepage does not
+list articles; do not add excerpts automatically.
 
 ## Incremental roadmap
 
-The bilingual foundation and blog/RSS are implemented. The homepage is
-intentionally limited to the name; Blog is hidden from shared navigation until
-real articles are published.
+The bilingual foundation and blog/RSS are implemented. The homepage follows the
+Home recipe; Blog is hidden from shared navigation until real articles are published.
 
-1. Keep the homepage minimal. Add content or areas only when real material and
-   a deliberate content decision exist; expose navigation when destinations are
-   available.
+1. Write the homepage intro and the open project copy; placeholders block deployment
+   until then.
 2. Add real technical writing to the existing blog collection as it is ready.
 3. Extend the existing project indexes and bilingual case studies when more real
    work is ready. Schleswig MCP documents architecture, evidence, trade-offs and

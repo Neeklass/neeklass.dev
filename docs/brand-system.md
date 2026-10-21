@@ -344,5 +344,5 @@ it in that form.
 | Footer with text links and Glyph as signature | Implemented; LinkedIn link waiting for the profile URL |
 | Glyph replaces the v8 Hidden Signature | Implemented; v8 component removed |
 | Favicon 16 px drawing and dark-tab outline | Drawn (`public/brand/favicon-16.svg`, rendered to `public/favicon-16.png`); confirm on real devices |
-| Homepage intro and project list | Waiting for copy |
+| Homepage intro and project list | Structure implemented; waiting for copy (placeholders block deployment) |
 | Project header with Zeitraum, Rolle, Technik | Implemented in `ProjectLayout` |
