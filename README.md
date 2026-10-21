@@ -6,13 +6,12 @@ three OFL fonts are self-hosted and there are no external analytics. Light and d
 visitor’s system preference.
 German is the default at `/`; the English homepage is at `/en/`.
 
-Both homepages intentionally contain only `Niklas Dittmann` in a single `h1`
-inside `main`, with generous whitespace and the shared navigation and footer.
-Do not add positioning copy, portfolio sections, project placeholders, experience
-placeholders or biography until real content and a deliberate content decision
-exist. The site should gain substance through genuine writing and real work;
-the blog is ready for that content but temporarily hidden from the shared UI.
-Homepage metadata remains neutral and locale-aware.
+Both homepages follow the "Home" recipe in [the brand system](docs/brand-system.md):
+the name in a single `h1`, Niklas's intro (80–120 words), one line explaining the
+name `neeklass`, and up to four selected projects. Copy follows
+[the content guide](docs/content-guide.md); open copy is marked with the
+`Placeholder` component, which blocks production builds until it is written.
+The blog is ready for content but temporarily hidden from the shared UI.
 
 
 ## Brand and design system
@@ -178,8 +177,10 @@ automatic translation or browser-language redirects.
 ## Project case studies
 
 Projects are discoverable through the localized header link and `/projects/`
-or `/en/projects/`. The homepages remain name-only and `BLOG_VISIBLE` remains
-`false`. Schleswig MCP is the first documented project; there are no placeholders.
+or `/en/projects/`. `BLOG_VISIBLE` remains `false`. Schleswig MCP is the first
+documented project. Its page follows the content guide's order (problem, approach,
+decisions, limitations, lessons, sources); copy that is still missing is marked
+with the `Placeholder` component, which blocks production builds until filled.
 
 The two `projects/schleswig-mcp/index.astro` pages hold the German and English
 editorial content separately, based on the supplied case-study copy. They use
@@ -187,13 +188,16 @@ editorial content separately, based on the supplied case-study copy. They use
 adding browser scripts or dependencies. The comparison remains stacked until
 112rem viewport width so the original screenshots have room for readable text.
 
-Approved SVGs and genuine screenshots are preserved byte-for-byte under
+Genuine screenshots are preserved byte-for-byte under
 `public/images/projects/schleswig-mcp/`; their full-size links open ordinary
-image documents. Editable Mermaid sources live under `docs/diagrams/` and are
-not shipped to browsers. Do not regenerate the approved SVG layout as part of
-a build. The diagram follows manual `data-theme` overrides and the system
-fallback through CSS, exposing only the active variant. At narrow widths it
-scrolls horizontally in a keyboard-focusable region instead of shrinking labels.
+image documents. The architecture diagram is generated in German and English,
+light and dark, by `node scripts/render-schleswig-diagram.mjs` from one layout
+definition that follows the brand system's diagram rules; the output is committed
+and nothing runs at build time. Editable Mermaid sources under `docs/diagrams/`
+remain development documentation. The diagram follows manual `data-theme`
+overrides and the system fallback through CSS, exposing only the active variant.
+At narrow widths it scrolls horizontally in a keyboard-focusable region instead
+of shrinking labels.
 
 Project facts were checked on 2026-10-19 against the
 [current project README](https://github.com/Neeklass/schleswig-mcp),
@@ -326,18 +330,16 @@ index links to its feed; document heads expose RSS autodiscovery only when
 
 `getPublishedPosts(locale)` from `src/lib/blog.ts` returns newest-first posts with
 resolved `locale`, `slug` and `url`, excluding drafts in all environments. It can
-support future writing sections if deliberately requested. The homepage currently
-shows only the name; do not add excerpts or placeholders automatically.
+support future writing sections if deliberately requested. The homepage does not
+list articles; do not add excerpts automatically.
 
 ## Incremental roadmap
 
-The bilingual foundation and blog/RSS are implemented. The homepage is
-intentionally limited to the name; Blog is hidden from shared navigation until
-real articles are published.
+The bilingual foundation and blog/RSS are implemented. The homepage follows the
+Home recipe; Blog is hidden from shared navigation until real articles are published.
 
-1. Keep the homepage minimal. Add content or areas only when real material and
-   a deliberate content decision exist; expose navigation when destinations are
-   available.
+1. Write the homepage intro and the open project copy; placeholders block deployment
+   until then.
 2. Add real technical writing to the existing blog collection as it is ready.
 3. Extend the existing project indexes and bilingual case studies when more real
    work is ready. Schleswig MCP documents architecture, evidence, trade-offs and

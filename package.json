@@ -12,7 +12,7 @@
     "test:blog": "node --test scripts/blog.test.mjs",
     "check:brand": "node scripts/check-brand.mjs",
     "test:brand": "node --test scripts/check-brand.test.mjs",
-    "build": "astro check && astro build",
+    "build": "npm run check:brand && astro check && astro build",
     "preview": "astro preview"
   },
   "dependencies": {

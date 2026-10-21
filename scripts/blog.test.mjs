@@ -50,7 +50,7 @@ test('static blog publication, translation links, RSS and draft isolation', { ti
       try {
         return execFileSync(process.execPath, [join(root, 'node_modules/astro/bin/astro.mjs'), 'build'], {
           cwd: fixtureRoot, encoding: 'utf8', timeout: 60_000,
-          env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1' },
+          env: { ...process.env, ASTRO_TELEMETRY_DISABLED: '1', ALLOW_COPY_PLACEHOLDERS: '1' },
           stdio: 'pipe', windowsHide: true,
         });
       } catch (error) {
@@ -75,7 +75,7 @@ test('static blog publication, translation links, RSS and draft isolation', { ti
     assert.doesNotMatch(german, /noindex/);
     const pageScripts = [...german.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
     const sharedScripts = [...(await html('')).matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/g)];
-    assert.deepEqual(pageScripts.map(match => match[0]), sharedScripts.map(match => match[0]), 'Articles must use only the shared theme and Hidden Signature scripts');
+    assert.deepEqual(pageScripts.map(match => match[0]), sharedScripts.map(match => match[0]), 'Articles must use only the shared theme and Glyph scripts');
     assert.equal(pageScripts[0][1].trim(), (await readFile(join(root, 'src/scripts/theme.js'), 'utf8')).trim());
     assert.match(german, /1 Min\. Lesezeit/);
     assert.match(english, /1 min read/);

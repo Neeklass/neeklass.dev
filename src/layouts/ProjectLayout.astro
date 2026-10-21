@@ -1,4 +1,6 @@
 ---
+// Project page recipe (docs/brand-system.md): header with back link, h1, lead,
+// facts and links; project sections; collapsed sources; update note.
 import BaseLayout from './BaseLayout.astro';
 import { labels, projectPaths, type Locale, type PageTranslations } from '../i18n';
 import '../styles/projects.css';
@@ -6,23 +8,46 @@ import '../styles/projects.css';
 interface Props {
   locale: Locale;
   title: string;
+  /** Lead under the title: what problem exists, for whom. Also the meta description. */
   description: string;
   translations: PageTranslations;
+  facts: { period: string; role: string; technology: string };
+  /** Only links that exist; availability is shown by these links, never by a status word. */
+  links: { href: string; label: string }[];
+  /** Month and year, e.g. "Oktober 2026". Only while the project is ongoing. */
+  updated?: string;
 }
-const { locale, title, description, translations } = Astro.props;
+const { locale, title, description, translations, facts, links, updated } = Astro.props;
+const ui = labels[locale];
 ---
 
 <BaseLayout locale={locale} title={`${title} — neeklass`} description={description} translations={translations}>
   <article class="case-study" aria-labelledby="project-title">
     <header class="project-heading reading-column">
-      <a class="back-link" href={projectPaths[locale]}>{labels[locale].backToProjects}</a>
+      <a class="back-link" href={projectPaths[locale]}>{ui.backToProjects}</a>
       <h1 id="project-title">{title}</h1>
       <p class="lead">{description}</p>
-      <slot name="introduction" />
+      <dl class="project-facts small">
+        <dt>{ui.period}</dt><dd>{facts.period}</dd>
+        <dt>{ui.role}</dt><dd>{facts.role}</dd>
+        <dt>{ui.technology}</dt><dd>{facts.technology}</dd>
+      </dl>
+      {links.length > 0 && (
+        <ul class="project-links">
+          {links.map(({ href, label }) => <li><a href={href}>{label}</a></li>)}
+        </ul>
+      )}
     </header>
     <slot />
+    {Astro.slots.has('sources') && (
+      <details class="project-sources reading-column">
+        <summary>{ui.sources}</summary>
+        <slot name="sources" />
+      </details>
+    )}
+    {updated && <p class="update-note small reading-column">{ui.descriptionUpdated}: {updated}</p>}
     <footer class="project-footer reading-column">
-      <a href={projectPaths[locale]}>{labels[locale].backToProjects}</a>
+      <a href={projectPaths[locale]}>{ui.backToProjects}</a>
     </footer>
   </article>
 </BaseLayout>

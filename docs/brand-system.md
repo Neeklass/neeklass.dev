@@ -338,11 +338,11 @@ it in that form.
 | --- | --- |
 | Palette and theme switching | Implemented |
 | Literata for all long-form text | Implemented |
-| Remove `01 —` labels and `FIG.` | Implemented on pages and `ProjectFigure`; diagram SVGs: to change |
+| Remove `01 —` labels and `FIG.` | Implemented, including the diagrams (`scripts/render-schleswig-diagram.mjs`); German diagram labels waiting for approval |
 | Language switch and metadata in Interface type instead of Mono | Implemented |
 | Wordmark without hover alias | Implemented |
 | Footer with text links and Glyph as signature | Implemented; LinkedIn link waiting for the profile URL |
 | Glyph replaces the v8 Hidden Signature | Implemented; v8 component removed |
 | Favicon 16 px drawing and dark-tab outline | Drawn (`public/brand/favicon-16.svg`, rendered to `public/favicon-16.png`); confirm on real devices |
-| Homepage intro and project list | Waiting for copy |
-| Project header with Zeitraum, Rolle, Technik | To implement |
+| Homepage intro and project list | Structure implemented; waiting for copy (placeholders block deployment) |
+| Project header with Zeitraum, Rolle, Technik | Implemented in `ProjectLayout` |

@@ -232,9 +232,6 @@ main {
   flex: 1;
   min-width: 0;
 }
-.home-name {
-  margin-block: clamp(3.5rem, 8vw, 6.5rem);
-}
 h1 {
   margin-top: var(--space-3);
   font-family: var(--font-reading);
