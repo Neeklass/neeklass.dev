@@ -6,21 +6,35 @@ import '../styles/projects.css';
 interface Props { locale: Locale }
 const { locale } = Astro.props;
 const ui = labels[locale];
-const summary = {
-  de: 'Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen. Eine REST-API und ein MCP-Server mit gemeinsamer Anwendungslogik, fünf aufbereiteten Snapshots und einem Live-Wasserstand.',
-  en: 'Making local open data accessible to applications and AI assistants. A REST API and an MCP server with shared application logic, five curated snapshots, and one live water-level integration.',
-};
+
+// Project index item: title, one sentence, and "Zeitraum · Rolle · Themen".
+const projects = [
+  {
+    slug: 'schleswig-mcp',
+    title: 'Schleswig MCP',
+    sentence: {
+      de: 'Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen.',
+      en: 'Making local open data accessible to applications and AI assistants.',
+    },
+    facts: {
+      de: ['Seit 10/2026', 'Eigenes Projekt', 'Open Data, REST, MCP'],
+      en: ['Since 10/2026', 'Own project', 'Open data, REST, MCP'],
+    },
+  },
+];
 ---
 
 <BaseLayout locale={locale} title={`${ui.projects} — neeklass`} description={ui.projectsDescription} translations={projectPaths}>
   <section class="projects-index reading-column" aria-labelledby="projects-title">
     <h1 id="projects-title">{ui.projects}</h1>
     <ul class="project-list">
-      <li>
-        <p class="editorial-meta">Open Data / REST / MCP</p>
-        <h2><a href={`${projectPaths[locale]}schleswig-mcp/`}>Schleswig MCP</a></h2>
-        <p>{summary[locale]}</p>
-      </li>
+      {projects.map((project) => (
+        <li>
+          <h2><a href={`${projectPaths[locale]}${project.slug}/`}>{project.title}</a></h2>
+          <p>{project.sentence[locale]}</p>
+          <p class="small">{project.facts[locale].join(' · ')}</p>
+        </li>
+      ))}
     </ul>
   </section>
 </BaseLayout>

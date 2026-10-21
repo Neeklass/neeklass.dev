@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="1310" viewBox="0 0 1100 1310" role="img" aria-labelledby="diagram-title diagram-desc">
+<title id="diagram-title">Systemarchitektur von Schleswig MCP</title>
+<desc id="diagram-desc">Webanwendungen nutzen die REST-API, KI-Assistenten den MCP-Server. Beide verwenden gemeinsame Anwendungslogik, Datenverarbeitung und Validierung. Fünf aufbereitete Open-Data-Snapshots liefern strukturierte Daten; eine externe API liefert den Live-Wasserstand.</desc>
+<rect width="1100" height="1310" fill="#252B29"/>
+<defs>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#EEE5E9"/></marker>
+<marker id="accent-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10Z" fill="#52DEE5"/></marker>
+</defs>
+<rect x="65" y="52" width="970" height="235" rx="4" fill="none" stroke="#515A56" stroke-width="1"/>
+<text x="93" y="88" text-anchor="start" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="16">Clients</text>
+<rect x="65" y="334" width="970" height="714" rx="4" fill="none" stroke="#515A56" stroke-width="1"/>
+<text x="93" y="370" text-anchor="start" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="16">Schleswig MCP</text>
+<rect x="65" y="1090" width="970" height="180" rx="4" fill="none" stroke="#515A56" stroke-width="1"/>
+<text x="93" y="1126" text-anchor="start" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="16">Öffentliche offene Daten</text>
+<path d="M299 231V418" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M801 231V418" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M299 516V555H519V605" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M801 516V555H681V605" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M600 703V750" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M520 848V880H327V913" fill="none" stroke="#EEE5E9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#arrow)"/>
+<path d="M299 1152V1013" fill="none" stroke="#B5BEB9" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke-dasharray="7 6" marker-end="url(#arrow)"/>
+<path d="M688 848V1046H816V1150" fill="none" stroke="#52DEE5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" marker-end="url(#accent-arrow)"/>
+<rect x="129" y="132" width="340" height="99" rx="4" fill="#252B29" stroke="#92DCE5" stroke-width="1.5"/>
+<text x="299" y="177.5" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Webanwendungen und Dienste</text>
+<text x="299" y="203.5" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">HTTP / JSON</text>
+<rect x="631" y="132" width="340" height="99" rx="4" fill="#252B29" stroke="#92DCE5" stroke-width="1.5"/>
+<text x="801" y="177.5" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">KI-Assistenten und Agenten</text>
+<text x="801" y="203.5" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">MCP-fähige Clients</text>
+<rect x="139" y="420" width="320" height="96" rx="4" fill="#252B29" stroke="#B5A0D2" stroke-width="1.5"/>
+<text x="299" y="464" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">REST-API</text>
+<text x="299" y="490" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">HTTP-Endpunkte · OpenAPI</text>
+<rect x="641" y="420" width="320" height="96" rx="4" fill="#252B29" stroke="#B5A0D2" stroke-width="1.5"/>
+<text x="801" y="464" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">MCP-Server</text>
+<text x="801" y="490" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Sechs Tools, nur lesend</text>
+<rect x="410" y="607" width="380" height="96" rx="4" fill="#252B29" stroke="#EEE5E9" stroke-width="1.5"/>
+<text x="600" y="651" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Gemeinsame Anwendungslogik</text>
+<text x="600" y="677" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Gemeinsame Domänenfunktionen</text>
+<rect x="410" y="752" width="380" height="96" rx="4" fill="#252B29" stroke="#EEE5E9" stroke-width="1.5"/>
+<text x="600" y="796" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Datenverarbeitung und Validierung</text>
+<text x="600" y="822" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Provider · Modelle · Prüfungen</text>
+<rect x="167" y="915" width="320" height="96" rx="4" fill="#252B29" stroke="#E6A76B" stroke-width="1.5"/>
+<text x="327" y="959" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Strukturierte Daten</text>
+<text x="327" y="985" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Fünf aufbereitete Snapshots</text>
+<rect x="139" y="1152" width="320" height="88" rx="4" fill="#252B29" stroke="#E6A76B" stroke-width="1.5"/>
+<text x="299" y="1192" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Open-Data-Datensätze</text>
+<text x="299" y="1218" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Aufbereitete Quelldateien</text>
+<rect x="641" y="1152" width="320" height="88" rx="4" fill="#252B29" stroke="#E6A76B" stroke-width="1.5"/>
+<text x="801" y="1192" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="600" font-size="21">Externe API</text>
+<text x="801" y="1218" text-anchor="middle" fill="#B5BEB9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="15">Live-Wasserstand</text>
+<rect x="238" y="290" width="122" height="30" rx="4" fill="#252B29" stroke="#515A56" stroke-width="1"/>
+<text x="299" y="310" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="14">HTTP / JSON</text>
+<rect x="695" y="290" width="212" height="30" rx="4" fill="#252B29" stroke="#515A56" stroke-width="1"/>
+<text x="801" y="310" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="14">Model Context Protocol</text>
+<rect x="213.5" y="1056" width="171" height="30" rx="4" fill="#252B29" stroke="#515A56" stroke-width="1"/>
+<text x="299" y="1076" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="14">Datenaufbereitung</text>
+<rect x="751" y="1056" width="130" height="30" rx="4" fill="#252B29" stroke="#515A56" stroke-width="1"/>
+<text x="816" y="1076" text-anchor="middle" fill="#EEE5E9" font-family="Familjen Grotesk, Arial, sans-serif" font-weight="400" font-size="14">Live-Abfrage</text>
+</svg>

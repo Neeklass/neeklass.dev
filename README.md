@@ -178,8 +178,10 @@ automatic translation or browser-language redirects.
 ## Project case studies
 
 Projects are discoverable through the localized header link and `/projects/`
-or `/en/projects/`. The homepages remain name-only and `BLOG_VISIBLE` remains
-`false`. Schleswig MCP is the first documented project; there are no placeholders.
+or `/en/projects/`. `BLOG_VISIBLE` remains `false`. Schleswig MCP is the first
+documented project. Its page follows the content guide's order (problem, approach,
+decisions, limitations, lessons, sources); copy that is still missing is marked
+with the `Placeholder` component, which blocks production builds until filled.
 
 The two `projects/schleswig-mcp/index.astro` pages hold the German and English
 editorial content separately, based on the supplied case-study copy. They use
@@ -187,13 +189,16 @@ editorial content separately, based on the supplied case-study copy. They use
 adding browser scripts or dependencies. The comparison remains stacked until
 112rem viewport width so the original screenshots have room for readable text.
 
-Approved SVGs and genuine screenshots are preserved byte-for-byte under
+Genuine screenshots are preserved byte-for-byte under
 `public/images/projects/schleswig-mcp/`; their full-size links open ordinary
-image documents. Editable Mermaid sources live under `docs/diagrams/` and are
-not shipped to browsers. Do not regenerate the approved SVG layout as part of
-a build. The diagram follows manual `data-theme` overrides and the system
-fallback through CSS, exposing only the active variant. At narrow widths it
-scrolls horizontally in a keyboard-focusable region instead of shrinking labels.
+image documents. The architecture diagram is generated in German and English,
+light and dark, by `node scripts/render-schleswig-diagram.mjs` from one layout
+definition that follows the brand system's diagram rules; the output is committed
+and nothing runs at build time. Editable Mermaid sources under `docs/diagrams/`
+remain development documentation. The diagram follows manual `data-theme`
+overrides and the system fallback through CSS, exposing only the active variant.
+At narrow widths it scrolls horizontally in a keyboard-focusable region instead
+of shrinking labels.
 
 Project facts were checked on 2026-10-19 against the
 [current project README](https://github.com/Neeklass/schleswig-mcp),

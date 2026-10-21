@@ -24,8 +24,8 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Brand rule tests
-        run: npm run test:brand
+      - name: Brand rules
+        run: npm run check:brand && npm run test:brand
       - name: Check and build
         run: npm run build
       - name: Blog tests

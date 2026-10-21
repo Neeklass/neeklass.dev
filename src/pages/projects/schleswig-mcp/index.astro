@@ -2,33 +2,46 @@
 import ProjectLayout from '../../../layouts/ProjectLayout.astro';
 import ThemeIllustration from '../../../components/ThemeIllustration.astro';
 import ProjectFigure from '../../../components/ProjectFigure.astro';
+import Placeholder from '../../../components/Placeholder.astro';
 import { labels } from '../../../i18n';
 
 const ui = labels.de;
 const imageBase = '/images/projects/schleswig-mcp';
 const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schleswig-mcp/' };
+const links = [
+  { href: 'https://schleswig-mcp-data-seven.vercel.app/', label: 'Projekt öffnen' },
+  { href: 'https://github.com/Neeklass/schleswig-mcp', label: 'Quellcode' },
+  { href: 'https://schleswig-mcp-data-seven.vercel.app/docs', label: 'REST-Dokumentation' },
+  { href: 'https://schleswig-mcp-data-seven.vercel.app/mcp-docs', label: 'MCP-Dokumentation' },
+];
 ---
 
-<ProjectLayout locale="de" title="Schleswig MCP" description="Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen." translations={translations}>
-  <Fragment slot="introduction">
-    <p>Öffentliche Informationen über Schleswig sind über verschiedene Herausgeber, Formate und Veröffentlichungsstände verteilt. Schleswig MCP macht ausgewählte lokale Daten über eine einheitliche REST-API und einen MCP-Server verfügbar. Beide Schnittstellen verwenden gemeinsame Anwendungslogik.</p>
-    <ul class="project-links">
-      <li><a href="https://schleswig-mcp-data-seven.vercel.app/">Projekt öffnen</a></li>
-      <li><a href="https://schleswig-mcp-data-seven.vercel.app/docs">REST-Dokumentation</a></li>
-      <li><a href="https://schleswig-mcp-data-seven.vercel.app/mcp-docs">MCP-Dokumentation</a></li>
-      <li><a href="https://github.com/Neeklass/schleswig-mcp">Quellcode</a></li>
-    </ul>
-    <p class="editorial-meta">6 Datensätze · 5 aufbereitete Snapshots · 1 Live-Wasserstand</p>
-  </Fragment>
+<ProjectLayout
+  locale="de"
+  title="Schleswig MCP"
+  description="Lokale Open Data für Anwendungen und KI-Assistenten zugänglich machen."
+  translations={translations}
+  facts={{ period: 'Seit 10/2026', role: 'Eigenes Projekt', technology: 'TypeScript, Node.js, REST, MCP, Vercel' }}
+  links={links}
+  updated="Oktober 2026"
+>
+  <section class="project-section" aria-labelledby="problem-title">
+    <div class="reading-column">
+      <h2 id="problem-title">Das Problem</h2>
+      <p>Öffentliche Informationen über Schleswig sind über verschiedene Herausgeber, Formate und Veröffentlichungsstände verteilt. Schleswig MCP macht ausgewählte lokale Daten über eine einheitliche REST-API und einen MCP-Server verfügbar. Beide Schnittstellen verwenden gemeinsame Anwendungslogik.</p>
+      <p><Placeholder hint="Was haben Menschen bisher gemacht, um an diese Daten zu kommen, und warum ist das mühsam?" /></p>
+    </div>
+  </section>
 
   <section class="project-section" aria-labelledby="architecture-title">
     <div class="reading-column">
       <h2 id="architecture-title">Eine Datenbasis, zwei Schnittstellen</h2>
       <p>REST-API und MCP-Server greifen auf dieselben Domänenfunktionen, Datenprovider, Validierungsregeln und Modelle zurück. Fünf Datensätze liegen als manuell aufbereitete Snapshots in der Anwendung. Der Wasserstand wird dagegen bei einer Anfrage über einen externen Dienst abgerufen.</p>
+      <p class="small">6 Datensätze · 5 aufbereitete Snapshots · 1 Live-Wasserstand</p>
     </div>
     <figure class="architecture-figure">
-      <ThemeIllustration light={`${imageBase}/mcp-architecture-light.svg`} dark={`${imageBase}/mcp-architecture-dark.svg`} width={1100} height={1510} alt="Architekturdiagramm: Webanwendungen greifen über REST zu, KI-Assistenten über MCP. Beide verwenden gemeinsame Logik, validierte Daten und einen externen Live-Dienst." openLabel={ui.openFullImage} scrollLabel={ui.diagramScroll} />
-      <figcaption><span class="figure-number">Abb. 1</span><p><strong>Systemarchitektur von Schleswig MCP.</strong> Zwei unterschiedliche Schnittstellen nutzen gemeinsame Anwendungslogik und Datenverarbeitung. Das Diagramm unterscheidet vorbereitete Datensätze von Live-Abfragen.</p></figcaption>
+      <ThemeIllustration light={`${imageBase}/architecture-de-light.svg`} dark={`${imageBase}/architecture-de-dark.svg`} width={1100} height={1310} alt="Architekturdiagramm: Webanwendungen greifen über REST zu, KI-Assistenten über MCP. Beide verwenden gemeinsame Logik, validierte Daten und einen externen Live-Dienst." openLabel={ui.openFullImage} scrollLabel={ui.diagramScroll} />
+      <figcaption><span class="figure-number">{ui.figure} 1</span><p><strong>Systemarchitektur von Schleswig MCP.</strong> Zwei unterschiedliche Schnittstellen nutzen gemeinsame Anwendungslogik und Datenverarbeitung. Das Diagramm unterscheidet vorbereitete Datensätze von Live-Abfragen.</p></figcaption>
     </figure>
   </section>
 
@@ -73,13 +86,30 @@ const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schlesw
     <div class="reading-column">
       <h2 id="decisions-title">Architekturentscheidungen und Kompromisse</h2>
       <p>Die Anwendung trennt Datenquellen, Validierung und fachliche Modelle von den öffentlichen Schnittstellen. REST und MCP verwenden dieselben Domänenfunktionen, unterscheiden sich aber in ihren Protokollen und Antwortformaten. Metadaten dokumentieren Herkunft, Lizenzen, Referenzzeitpunkte und bekannte Einschränkungen.</p>
-      <p>Fünf Datensätze werden nicht automatisch aktualisiert, sondern liegen als manuell aufbereitete Snapshots vor. Nur der Wasserstand wird live abgefragt; der Pegelwert selbst ist weder eine Hochwasserwarnung noch eine Aussage zur Badesicherheit. Das Projekt soll öffentliche Daten nachvollziehbar zugänglich machen, nicht Vollständigkeit oder Echtzeitaktualität für alle Quellen versprechen.</p>
-      <h3 class="source-heading">Datenherkunft und Quellenstand</h3>
-      <p>Die gezeigte Bevölkerungsprognose stammt von <a href="https://opendata.schleswig-holstein.de/dataset/bevolkerungsvorausberechnung-fur-schleswig-holstein-bis-2040">Wegweiser Kommune / Bertelsmann Stiftung (Open Data SH)</a>. Die Quellmetadaten nennen den <time datetime="2025-03-21">21. März 2025</time> als Veröffentlichungsdatum und den <time datetime="2025-06-04">4. Juni 2025</time> als letzte Änderung. Das sind keine Mess- oder Abrufzeitpunkte. Die Daten verbinden historische Ausgangswerte mit Prognosen bis 2040; sie sind keine aktuellen Einwohnerzahlen.</p>
-      <p>Die Quelle steht unter <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Die ursprünglichen Quellenangaben nennen außerdem die Statistischen Ämter der Länder, die Forschungsdatenzentren der Statistischen Ämter des Bundes und der Länder sowie Deenst GmbH. <a href="https://github.com/Neeklass/schleswig-mcp/blob/main/docs/datasources/govdata.md">Die Datenquellendokumentation</a> erläutert Aufbereitung und bekannte Grenzen; Download- und Aufbereitungszeitpunkte sind nicht bekannt.</p>
-      <p>Weitere Quellen sind PEGELONLINE / WSV, LVermGeo SH, das Denkmalregister über Open Data SH, Sozialministerium S-H für die Badegewässer und die Bundesnetzagentur. Die jeweiligen <a href="https://github.com/Neeklass/schleswig-mcp#attribution-and-licensing">Quellenangaben und Lizenzen</a> bleiben maßgeblich. Ladepunkte zeigen keine Live-Verfügbarkeit; Register sind nicht zwingend vollständig.</p>
-      <p>Screenshots: unveränderte Aufnahmen von Claude (Anthropic) aus diesem Projekt. Die Antworten und die Grafik bleiben überprüfungsbedürftig; ein MCP-Zugriff garantiert keine korrekten KI-Antworten.</p>
-      <p><strong>Unabhängiges Projekt:</strong> Schleswig MCP wird nicht von der Stadt Schleswig betrieben oder unterstützt.</p>
+      <p><Placeholder hint="Warum aufbereitete Snapshots statt automatischer Aktualisierung? Welche Optionen gab es, was hast du gewählt und warum?" /></p>
     </div>
   </section>
+
+  <section class="project-section" aria-labelledby="limits-title">
+    <div class="reading-column">
+      <h2 id="limits-title">Grenzen</h2>
+      <p>Fünf Datensätze werden nicht automatisch aktualisiert, sondern liegen als manuell aufbereitete Snapshots vor. Nur der Wasserstand wird live abgefragt; der Pegelwert selbst ist weder eine Hochwasserwarnung noch eine Aussage zur Badesicherheit. Das Projekt soll öffentliche Daten nachvollziehbar zugänglich machen, nicht Vollständigkeit oder Echtzeitaktualität für alle Quellen versprechen.</p>
+    </div>
+  </section>
+
+  <section class="project-section" aria-labelledby="lessons-title">
+    <div class="reading-column">
+      <h2 id="lessons-title">Was ich gelernt habe</h2>
+      <p><Placeholder hint="Zwei bis drei konkrete Lektionen, z. B. zum Deployment eines MCP-Servers und zum Metadaten-Management, damit Kontext erhalten bleibt" /></p>
+    </div>
+  </section>
+
+  <Fragment slot="sources">
+    <h3 class="source-heading">Datenherkunft und Quellenstand</h3>
+    <p>Die gezeigte Bevölkerungsprognose stammt von <a href="https://opendata.schleswig-holstein.de/dataset/bevolkerungsvorausberechnung-fur-schleswig-holstein-bis-2040">Wegweiser Kommune / Bertelsmann Stiftung (Open Data SH)</a>. Die Quellmetadaten nennen den <time datetime="2025-03-21">21. März 2025</time> als Veröffentlichungsdatum und den <time datetime="2025-06-04">4. Juni 2025</time> als letzte Änderung. Das sind keine Mess- oder Abrufzeitpunkte. Die Daten verbinden historische Ausgangswerte mit Prognosen bis 2040; sie sind keine aktuellen Einwohnerzahlen.</p>
+    <p>Die Quelle steht unter <a href="https://creativecommons.org/publicdomain/zero/1.0/">CC0 1.0</a>. Die ursprünglichen Quellenangaben nennen außerdem die Statistischen Ämter der Länder, die Forschungsdatenzentren der Statistischen Ämter des Bundes und der Länder sowie Deenst GmbH. <a href="https://github.com/Neeklass/schleswig-mcp/blob/main/docs/datasources/govdata.md">Die Datenquellendokumentation</a> erläutert Aufbereitung und bekannte Grenzen; Download- und Aufbereitungszeitpunkte sind nicht bekannt.</p>
+    <p>Weitere Quellen sind PEGELONLINE / WSV, LVermGeo SH, das Denkmalregister über Open Data SH, Sozialministerium S-H für die Badegewässer und die Bundesnetzagentur. Die jeweiligen <a href="https://github.com/Neeklass/schleswig-mcp#attribution-and-licensing">Quellenangaben und Lizenzen</a> bleiben maßgeblich. Ladepunkte zeigen keine Live-Verfügbarkeit; Register sind nicht zwingend vollständig.</p>
+    <p>Screenshots: unveränderte Aufnahmen von Claude (Anthropic) aus diesem Projekt. Die Antworten und die Grafik bleiben überprüfungsbedürftig; ein MCP-Zugriff garantiert keine korrekten KI-Antworten.</p>
+    <p><strong>Unabhängiges Projekt:</strong> Schleswig MCP wird nicht von der Stadt Schleswig betrieben oder unterstützt.</p>
+  </Fragment>
 </ProjectLayout>
