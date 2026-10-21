@@ -17,7 +17,7 @@ Homepage metadata remains neutral and locale-aware.
 
 ## Brand and design system
 
-The visual identity uses the custom-outlined `neeklass.` wordmark, the compact `n.` monogram, and a restrained **Editorial × Engineering** design language. Theme-aware colors live in `src/styles/global.css`. Familjen Grotesk (UI), Literata (editorial), and IBM Plex Mono (technical labels) are self-hosted in `public/fonts/` under SIL Open Font Licenses.
+The visual identity uses the custom-outlined `neeklass.` wordmark, the compact `n.` monogram, and a restrained **Editorial × Engineering** design language. Theme-aware colors live in `src/styles/global.css`. Literata (all reading text and headings), Familjen Grotesk (interface: navigation, lists, metadata, footer) and IBM Plex Mono (code only) are self-hosted in `public/fonts/` under SIL Open Font Licenses.
 
 See [the brand system](docs/brand-system.md) for exact colors, typography roles, mark usage and illustration rules, and [the content guide](docs/content-guide.md) for what appears where and when a project is ready to be shown. The editable [project-cover template](templates/project-cover/README.md) generates light/dark SVGs from project metadata without client-side scripts or extra dependencies. It is intentionally not a public portfolio section.
 
@@ -151,8 +151,8 @@ GitHub and email (`mailto:mail@neeklass.dev`) are inline SVG footer links with
 accessible labels, tooltips, `currentColor`, visible focus and 44px hit areas.
 The current language's RSS icon appears after email when `BLOG_VISIBLE` is enabled.
 Their small local components live in `src/components/icons/`. No icon library
-is installed. Reuse `.editorial-meta` for quiet monospace metadata and use rules,
-spacing and typography for hierarchy rather than cards or decorative elements.
+is installed. Use `.small` (alias `.editorial-meta`) for metadata in Small type and use
+rules, spacing and typography for hierarchy rather than cards or decorative elements.
 
 ## Locale conventions
 

@@ -6,6 +6,7 @@ export default {
   projects: 'Projects',
   projectsDescription: 'Documented projects in software and open data.',
   backToProjects: 'Back to projects',
+  figure: 'Fig.',
   openFullImage: 'Open full-size image',
   diagramScroll: 'Architecture diagram – scroll horizontally on small screens',
   sendEmail: 'Send email',

@@ -337,10 +337,10 @@ it in that form.
 | Rule | Status |
 | --- | --- |
 | Palette and theme switching | Implemented |
-| Literata for all long-form text | To change: project prose uses Familjen Grotesk |
-| Remove `01 —` labels and `FIG.` | To change: project pages, `ProjectFigure`, diagram SVGs |
-| Language switch and metadata in Interface type instead of Mono | To change |
-| Wordmark without hover alias | To change: remove `.brand-alias` |
+| Literata for all long-form text | Implemented |
+| Remove `01 —` labels and `FIG.` | Implemented on pages and `ProjectFigure`; diagram SVGs: to change |
+| Language switch and metadata in Interface type instead of Mono | Implemented |
+| Wordmark without hover alias | Implemented |
 | Footer with text links and Glyph as signature | Proposed; confirm before implementing |
 | Glyph replaces the v8 Hidden Signature | To implement; v8 artwork is retired |
 | Favicon 16 px drawing and dark-tab outline | To design |

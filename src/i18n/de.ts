@@ -6,6 +6,7 @@ export default {
   projects: 'Projekte',
   projectsDescription: 'Dokumentierte Projekte zu Software und offenen Daten.',
   backToProjects: 'Zurück zu den Projekten',
+  figure: 'Abb.',
   openFullImage: 'Bild in voller Größe öffnen',
   diagramScroll: 'Architekturdiagramm – auf kleinen Bildschirmen horizontal scrollbar',
   sendEmail: 'E-Mail senden',
