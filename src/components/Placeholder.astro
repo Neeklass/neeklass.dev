@@ -1,12 +1,14 @@
 ---
 // Marks copy that Niklas still has to write (see docs/content-guide.md).
 // Visible in development; a production build fails while any placeholder is
-// rendered, so unfinished copy can never be deployed by accident.
+// rendered, so unfinished copy can never be deployed by accident. Tests that
+// build fixtures may opt out with ALLOW_COPY_PLACEHOLDERS=1.
 interface Props {
   hint: string;
 }
 const { hint } = Astro.props;
-if (import.meta.env.PROD) {
+const env = (globalThis as { process?: { env?: Record<string, string | undefined> } }).process?.env;
+if (import.meta.env.PROD && env?.ALLOW_COPY_PLACEHOLDERS !== '1') {
   throw new Error(`Unfilled copy placeholder: "${hint}" (${Astro.url.pathname}). Replace it with real copy before building for production.`);
 }
 ---
