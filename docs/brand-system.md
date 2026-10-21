@@ -1,191 +1,346 @@
 # neeklass Brand & Design System
 
-Version: 1.0 (October 2026). Implementation reference for neeklass.dev.
+Version 2.0 (October 2026). The single source of truth for how neeklass.dev
+looks and behaves. It replaces version 1.0. Content rules (what goes where,
+when a project is ready, how texts are structured) live in
+[the content guide](content-guide.md).
 
-## Brand identity
+## How to use this document
 
-**Principle:** Editorial × Engineering. A personal publishing identity for real software work, data, AI, and technical writing; not a startup identity or a claim about projects that have not shipped.
+Work through it in this order whenever something visible changes:
 
-**Tone:** quiet, personal, precise, readable, warm, considered. Favor technical evidence, diagrammatic explanations and actual work over decorative marketing. Influences: restrained editorial typography and personal, explanatory illustrations; never reproduce another creator's assets.
+1. **Find a component.** Check [Components](#components). If one fits, use it
+   unchanged, even if it is not a perfect match.
+2. **Run the checklist.** If nothing fits, answer the
+   [decision checklist](#decision-checklist). Most new ideas end here.
+3. **Extend the system first.** If a new component or token is really needed,
+   add it to this document, then implement it. Never the other way round.
 
-## Marks
+Precedence: Niklas's explicit decision > this document > existing code >
+general taste. Public copy (German and English) is written by Niklas. Tools
+may propose structure and use `[placeholders]`, but never write final copy.
 
-- Primary wordmark: `neeklass.` (all lowercase, period required).
-- Secondary monogram: `n.` (for avatars, favicons and discreet attribution).
-- The marks are vector outlines derived from **Epunda Slab Regular (400)**, including the OpenType `ss01` *single-storey a*. Do not replace it with the IPA symbol `ɑ`.
-- The Cyan signature dot is intentionally prominent, close to the letter; in the monogram it sits optically near the right foot of `n`. It is not a separate app icon.
-- The canonical assets are `public/brand/wordmark-{light,dark}.svg`, `monogram-{light,dark}.svg` and `public/favicon.svg`. Use these instead of typing the wordmark in a web font.
-- Light artwork: Graphite lettering + dark teal dot. Dark artwork: Pearl lettering + Cyan dot.
-- Do not stretch, outline, add gradients, glow or shadow to the mark. Animation is limited to the approved [Hidden Signature](#hidden-signature) below; the primary wordmark and favicon remain static. Keep quiet surrounding space. Monochrome outputs may be derived for one-color printing.
+## Principles
 
-## Palette
+These six rules decide every case the rest of the document does not cover.
 
-| Color | Hex | Function |
+1. **Content sets the structure.** Headings, numbers, labels and dates appear
+   only when they say something true about the content. A list of two projects
+   is not a numbered sequence.
+2. **One element, one job.** No decorative duplicates: no section numbers, no
+   status dots, no icon next to a text link that already says the same.
+3. **Type and space do the work.** Hierarchy comes from typeface, size,
+   weight, spacing and thin rules, not from cards, colour fields or shadows.
+4. **The dot is the signature.** The teal/cyan dot appears only in the
+   wordmark, the monogram, the favicon and the core of the Glyph's ear module.
+5. **Quiet by default, personal in one place.** The Protogen Glyph is an easter
+   egg (footer, 404). It never appears in the header, a hero or a CV.
+6. **Nothing that ages visibly.** No dates on overview pages, no effects tied
+   to a design trend, no claims that need constant updating.
+
+## Identity elements
+
+| Element | Role | Used in | Never |
+| --- | --- | --- | --- |
+| Wordmark `neeklass.` | Sender: whose site is this? | Site header, project covers, link previews | As avatar or favicon (too wide) |
+| Monogram `n.` | Short form of the wordmark | Favicon; resting state of the Glyph | Next to the wordmark |
+| Favicon | Recognise the tab | Browser tabs, bookmarks | Any other mark than the monogram |
+| Glyph (Protogen) | Persona, easter egg | Footer (52 px), 404 (180 px), community avatars | Header, hero, navigation, CV, LinkedIn |
+
+### Wordmark and monogram
+
+- Vector outlines derived from **Epunda Slab Regular (400)** with the `ss01`
+  single-storey *a*. Canonical files: `public/brand/wordmark-{light,dark}.svg`,
+  `monogram-{light,dark}.svg`. Use the files; never type the wordmark in a web
+  font.
+- Light artwork: Graphite letters, Dark Teal dot. Dark artwork: Pearl letters,
+  Cyan dot.
+- Do not stretch, outline, animate, add gradients, glow or shadow. Keep quiet
+  space around the mark. Monochrome versions may be derived for one-colour use.
+- The wordmark has no hover effect and no alias text. The name connection is
+  explained once in the homepage copy instead.
+
+### Favicon
+
+- The monogram on a rounded square: Pearl `n`, Cyan dot, ground `#252B29`.
+- Needs a dedicated 16 px drawing: slightly heavier `n`, larger dot, and a thin
+  light outline on the tile so it stays visible on dark browser tab bars.
+  Larger sizes use the regular artwork.
+
+### Glyph (Protogen)
+
+A geometric Protogen in profile, facing right: dark visor with a happy LED
+face, lynx-like ears, round ear module with a backward spike. Built as solid
+shapes without outlines; parts are separated by a background-coloured gap.
+
+Construction (viewBox `0 0 480 480`, glyph coordinates):
+
+| Part | Geometry | Fill |
 | --- | --- | --- |
-| Graphite | `#383D3B` | Primary ink and structural lines |
-| Pearl | `#EEE5E9` | Light background |
-| Gray | `#7C7C7C` | Neutral graphic utility; not default body text |
-| Cyan | `#52DEE5` | Signature accent on dark, graphics |
-| Ice | `#92DCE5` | Secondary graphic/data color |
-| Apricot | `#E6A76B` | Optional illustration accent |
-| Lavender | `#B5A0D2` | Optional illustration accent |
-| Dark teal | `#0B6972` | Accessible accent/link color on Pearl |
+| Back ear | `M262 186 L304 40 L346 196 Z`, 10 px round-join stroke in the same colour | `--glyph-ink` |
+| Front ear | `M162 250 L130 44 L252 202 Z`, same stroke | `--glyph-ink` |
+| Visor | circle `cx 292, cy 282, r 112` | `--glyph-visor` (dark theme adds a 6 px `--glyph-rim` stroke) |
+| Spike | `M134 254 L82 282 L134 310 Z`, 12 px gap stroke | `--glyph-ink` |
+| Ear module | circle `cx 172, cy 282, r 46`, 12 px gap stroke | `--glyph-ink` |
+| Module core (the dot) | circle `cx 172, cy 282, r 22` | `--accent` |
+| Eye | `M282 252 Q304 222 328 250`, 18 px round stroke | `--glyph-led` |
+| Mouth | `M306 334 L322 322 L338 334 L354 322 L370 334 Q386 334 398 316`, 11 px, miter joins | `--glyph-led` |
 
-### Semantic themes
+Eye and mouth are clipped to the visor (circle radius 109). The "gap stroke"
+uses the colour of the surface behind the glyph.
 
-| Token | Light | Dark |
+Resting state: the monogram `n.` (letter path from the monogram, placed with
+`translate(80 385) scale(.6)`; dot at `cx 405, cy 367, r 24`).
+
+**Animation (open):**
+
+| Start | Duration | What happens |
 | --- | --- | --- |
-| Background | `#EEE5E9` | `#252B29` |
-| Surface | `#F8F5F6` | `#383D3B` |
-| Foreground | `#383D3B` | `#EEE5E9` |
-| Secondary text | `#56625D` | `#B5BEB9` |
-| Accent / links | `#0B6972` | `#52DEE5` |
-| Border | `#CEC5CA` | `#515A56` |
+| 0 ms | 180 ms | `n` fades out |
+| 0 ms | 560 ms | The dot moves to the ear module and becomes its core |
+| 200 ms | 360 ms | Module ring scales up from the dot, slight overshoot |
+| 240 ms | 480 ms | Visor grows forward out of the module, slight overshoot |
+| 300 ms | 300 ms | Spike extends backwards |
+| 380 ms | 380 ms | Ears rise behind the visor |
+| 640 ms | 200 ms | Face lights up (opacity and vertical scale, like a blink) |
 
-The bright Cyan `#52DEE5` on Pearl does **not** meet normal-text contrast. Use dark teal for light-theme interactive text. Test final component colors and focus states with real contrast measurements. Theme preference remains System → Light → Dark and must work without client-side JavaScript.
+Easing: `cubic-bezier(.25,.72,.2,1)` for movement,
+`cubic-bezier(.3,1.25,.5,1)` for the two overshoots. Closing: everything
+returns at once in 240 ms. With `prefers-reduced-motion: reduce` there is no
+transition; the interaction stays the same. The animation never changes page
+layout.
 
-## Typography roles
+Interaction: mouse hover opens and leaving closes (unless keyboard focus
+remains). Keyboard focus opens; Enter and Space toggle; Escape closes without
+moving focus. Touch taps toggle. An outside press closes. The element is a
+`<button>` with a stable localised name and `aria-pressed`; the SVG is hidden
+from assistive technology. Without JavaScript the static monogram is shown.
 
-| Role | Typeface | Where |
+Sizes: 52 px in the footer, 180 px on the 404 page, no frame on the website.
+Community avatars use the open glyph inside a round frame (same stroke weight
+as the module gap), because platforms crop avatars round.
+
+## Tokens
+
+All values live in `src/styles/global.css`. Do not introduce colours, fonts,
+sizes, radii or shadows outside this list.
+
+### Colour
+
+| Token | Light | Dark | Use |
+| --- | --- | --- | --- |
+| `--background` | `#EEE5E9` Pearl | `#252B29` | Page ground |
+| `--surface` | `#F8F5F6` | `#383D3B` | Code blocks, figure backgrounds |
+| `--foreground` | `#383D3B` Graphite | `#EEE5E9` | Text, strong rules |
+| `--muted` | `#56625D` | `#B5BEB9` | Metadata, captions, secondary text |
+| `--border` | `#CEC5CA` | `#515A56` | Thin rules |
+| `--accent` | `#0B6972` Dark Teal | `#52DEE5` Cyan | Links, focus, the dot |
+| `--glyph-ink` | `--foreground` | `--foreground` | Glyph ears, module, spike |
+| `--glyph-visor` | `#1B201F` | `#121615` | Glyph visor |
+| `--glyph-led` | `#52DEE5` | `#52DEE5` | Glyph face |
+| `--glyph-rim` | none | `#4A524F` | Glyph visor edge in dark theme |
+
+Ice `#92DCE5`, Apricot `#E6A76B` and Lavender `#B5A0D2` are reserved for
+diagrams, where they distinguish different concepts. Cyan on Pearl fails text
+contrast; use Dark Teal for text and interactive elements in the light theme.
+
+### Typography
+
+| Role | Typeface | Size / line height | Used for |
+| --- | --- | --- | --- |
+| Display | Literata 500, tracking −0.02em | `clamp(2.25rem, 5vw, 3.5rem)` / 1.15 | Page title (`h1`) |
+| Section | Literata 500 | `clamp(1.5rem, 3vw, 2rem)` / 1.3 | `h2` |
+| Subsection | Literata 500 | `1.25rem` / 1.4 | `h3` |
+| Lead | Literata 400 | `clamp(1.1875rem, 2.2vw, 1.375rem)` / 1.6 | First paragraph under a title |
+| Reading | Literata 400 | `1.125rem` / 1.75 | All long-form text: project pages, articles |
+| Interface | Familjen Grotesk 400/600 | `0.9375rem` / 1.6 | Navigation, list descriptions, tables, buttons, footer |
+| Small | Familjen Grotesk 400 | `0.875rem` / 1.6, `--muted` | Metadata, captions, dates |
+| Code | IBM Plex Mono 400 | `0.875em` / 1.7 | Code, commands, file names, literal values |
+
+Rules: two text families on a page (Literata and Familjen Grotesk); Mono only
+for code. No uppercase labels with letter-spacing. Sentence case for headings
+and labels. Long-form text has a measure of at most `40rem`.
+
+### Space, lines, shape
+
+| Token | Value | Use |
 | --- | --- | --- |
-| Wordmark & monogram | Custom Epunda Slab outlines (400; `ss01`) | Logos only |
-| UI & body | Familjen Grotesk (400–700) | Navigation, controls, descriptions, labels |
-| Editorial | Literata (400–700) | Headlines, articles, quotations and cover titles |
-| Technical | IBM Plex Mono 400 | Metadata, code, diagram labels, references |
+| `--space-1` | `0.5rem` | Inside a component |
+| `--space-2` | `1rem` | Between related lines |
+| `--space-3` | `1.5rem` | Between paragraphs and list items |
+| `--space-4` | `2rem` | Between blocks inside a section |
+| `--space-6` | `3rem` | Before a figure or new subsection |
+| `--space-8` | `clamp(3rem, 7vw, 5rem)` | Between page sections |
+| `--content-width` | `66rem` | Site shell |
+| `--reading-width` | `40rem` | Text column |
+| `--figure-width` | `52rem` | Figures and diagrams |
+| Rule | `1px solid var(--border)` | Separating items and sections |
+| Strong rule | `1px solid var(--foreground)` | Top of a list (homepage project list) |
+| Radius | `4px` | Code blocks and controls only |
 
-Three website text families are self-hosted in `public/fonts/` with their original SIL OFL license files. The logo does not require web font downloads to appear correctly. Use fallback system fonts on failure. Avoid setting entire interfaces in monospace or serif.
+No shadows, gradients, blur or glass. Focus: `2px solid var(--accent)` with
+`outline-offset: 3px`.
 
-## Composition
+### Motion
 
-- Editorial hierarchy with generous whitespace and strong reading rhythm; favor rules and type over excessive card surfaces.
-- Keep the homepage minimal: it intentionally contains only the name in the main area.
-- Navigation is text-led; utility icons are okay.
-- Avoid AI/SaaS tropes, glass effects, neon/glow, arbitrary gradients, fictitious work, stock heroes and busy animation.
-- Accessibility: semantic HTML, keyboard focus, readable line lengths, reduced motion, text contrast, and coherent responsive breakpoints.
+Only two kinds: colour changes on hover (150 ms) and the Glyph. Nothing moves
+on scroll or page load.
 
-## Illustration system
+## Components
 
-- Treat diagrams as real information graphics: clearly indicate inputs, processing, interfaces, decisions, and trade-offs.
-- Use fine strokes, purposeful arrows, short technical annotations (`FIG. 01`, `API`, `DATA`), and consistent caption spacing.
-- Cyan is the signature; Ice, Apricot and Lavender can clarify *different* concepts, not color every object for decoration.
-- Not every project should have the same four-node pipeline. A project-specific illustration is preferable to a diagram that misrepresents functionality.
-- Label conceptual architecture as conceptual. Do not imply implementations or features that are not real.
+Each component lists what is fixed and what varies. Fixed parts are not
+adjusted per page.
 
-## Project case-study figures
+### Site header
 
-Use Literata for project and section headings, Familjen Grotesk for prose, and
-IBM Plex Mono for quiet section and figure labels. Keep prose within 44rem;
-figures can use the wider shared shell. Use whitespace and horizontal rules.
+- Fixed: wordmark left; text navigation and language switch right; theme
+  control as an icon button; one thin rule below.
+- Navigation: `Projekte` / `Projects`; `Blog` only once at least one article is
+  published. At most three items.
+- Language switch: `DE EN` in Interface type, current language in 600 weight.
+- Never: icons in the navigation, numbered items, a hover alias on the
+  wordmark.
 
-Schleswig MCP uses the approved static architecture SVGs unchanged, with CSS
-switching for System, Light and Dark. Only the active illustration and full-size
-link are exposed to assistive technology. Preserve the vertical aspect ratio;
-on small screens use horizontal scrolling and a full-size link to keep labels
-readable. Mermaid sources remain development documentation, not browser assets.
+### Site footer
 
-Genuine Claude screenshots retain their original colors and full context in
-both page themes. Never recolor, darken, fabricate or crop away source notes.
-Intrinsic dimensions reserve layout space. Provide translated alt text, visible
-captions and ordinary full-size links. Stack the comparison at normal widths;
-use equal columns only on wide screens (112rem and above). The chart has its own
-wide figure, with the original axis limitations stated in its caption.
+- Fixed: left the Glyph followed by `© {year} Niklas Dittmann`; right the
+  contact links as plain text: `GitHub · LinkedIn · mail@neeklass.dev`
+  (plus `RSS` while the blog is visible). One thin rule above.
+- The e-mail address is written out so it can be copied.
+- External links carry no arrow or icon. The Glyph sits with the signature,
+  not in the link row, so it is not read as one of the links.
 
-## Reusable project cover
+### Homepage intro
 
-The source-controlled generator and neutral editable configuration live at:
-- `scripts/render-project-cover.mjs`
-- `templates/project-cover/example.json`
-- `templates/project-cover/README.md`
+- `h1` with the full name, then the intro text in Lead type (Niklas's copy,
+  roughly 80–120 words), then one short line in Small type explaining the name
+  `neeklass`.
+- No portrait, no positioning slogan, no list of skills.
 
-The default canvas is **1200 × 630** for Open Graph and link previews. Each configuration produces light and dark SVGs. Review typography, thumbnail legibility and diagrams before publishing. Templates are development assets and are not automatically listed as projects on the website.
+### Project list (homepage)
 
-## Implementation & status
+- Strong rule on top with a plain heading (`Ausgewählte Projekte`).
+- Each item: title in Literata (Section size on the homepage), one sentence in
+  Interface type. Add a short role note only when it differs from "own
+  project", for example `Ehrenamtlich im Team`.
+- No dates, no status, no tags, no thumbnails. Up to four items; with more,
+  show four and link to the project index.
 
-The SVG wordmark and monogram and the palette were approved visually. Typography/color integration and the first reusable cover generator are version 1 implementation, still subject to real-device QA. Fine details like long-title line breaking and 16-pixel favicon antialiasing should be revisited only with concrete test evidence.
+### Project index item
 
-## Hidden Signature
+- Like the homepage item, plus one Small line: `Zeitraum · Rolle · Themen`.
 
-The Hidden Signature is a quiet personal detail: the canonical `n.` monogram
-reveals an approved geometric, Protogen-inspired symbol. It is not a replacement
-for the primary wordmark or favicon. Keep homepage content, editorial typography,
-navigation and existing utility links intact. Do not add captions or decoration.
+### Project header
 
-### Approved artwork and placement
+- Back link, `h1`, Lead paragraph stating the problem.
+- Facts as a definition list in Small type: `Zeitraum`, `Rolle`, `Technik`.
+- Links in one line: `Projekt öffnen · Quellcode · Dokumentation` (only those
+  that exist). Availability is shown by these links, never by a status word.
 
-The supplied `neeklass-hidden-mark-v8` package is the artwork source of truth:
-`HiddenMarkEasterEgg.astro`, `footer-preview.html` and `404-preview.html`.
-Retain its vector letter, silhouette, coordinates, stroke widths and layer order.
-Do not redraw the illustration or add detail.
+### Project section
 
-- The shared footer uses a 52px square, simplified ears and a stronger eye stroke,
-  without inner-ear shading or a mouth. It sits before the existing utility links.
-- The bilingual 404 page uses a 180px square with both ear shading and the stepped
-  mouth. It accompanies the existing text in a wrapping editorial layout.
+- `h2` in Literata, body in Reading type, separated by a thin rule and
+  `--space-8`.
+- Standard order: Problem → Ansatz → Entscheidungen → Grenzen → Was ich
+  gelernt habe → Wie es weitergeht (optional). See the content guide.
+- No eyebrow labels, no numbers in front of headings.
 
-Both instances reserve their dimensions before interaction; animation never
-changes page layout. Buttons have a minimum 44px hit area. The SVG scales uniformly
-within its square view box and fits the available width.
+### Figure
 
-### SVG construction
+- Image or diagram, then a caption in Small type:
+  `Abb. 1  Short title. One or two sentences of explanation.`
+  (`Fig. 1` in English). Numbering per page.
+- Screenshots stay unaltered; never crop away source notes. Diagrams provide
+  light and dark variants and a full-size link.
 
-The orb has center `(301, 281)` and radius `114`. One geometry definition drives
-its fill, last-painted outline and concentric face clipping region, inset by `8`
-units (radius `106`), exactly as in v8. The eye and mouth are children of that clip.
-The entire group translates and scales uniformly from the original dot at
-`(405, 367)`, radius `24`. Never scale its axes independently, morph it into a
-polygon, or animate the facial details separately from the orb's coordinate space.
+### Diagram
 
-Closed ears and the reduced `<` bracket render behind the circular side module,
-which sits below the ears and behind the main orb. The bracket closes underneath
-the module's opaque fill, preserving the approved visible contour without exposed
-endpoints. The eye and mouth intentionally remain clipped open strokes.
-Each component instance receives a unique clip ID so both variants can coexist.
+- Explain a real mechanism; label things in the page's language, in sentence
+  case, in Interface type. No numbered tiers, no uppercase labels, no
+  branding text inside the diagram.
+- Thin strokes, one accent for the thing that matters (for example the live
+  connection), Ice/Apricot/Lavender only to separate different concepts.
+- Must be readable at 360 px width or offer horizontal scrolling plus a
+  full-size link.
 
-### Theme tokens
+### Code block
 
-All palette values live in `src/styles/global.css`:
+- Surface background, thin border, 4 px radius, Code type, horizontal scroll.
+- Optional caption naming the file path.
 
-| Token | Light | Dark |
-| --- | --- | --- |
-| `--background` | `#EEE5E9` | `#252B29` |
-| `--foreground` | `#383D3B` | `#EEE5E9` |
-| `--accent` | `#0B6972` | `#52DEE5` |
-| `--brand-ice` (ear shading) | `#92DCE5` | `#92DCE5` |
+### Sources and licences
 
-The mark consumes these shared tokens; facial strokes use the background color.
-Existing `color-scheme`, `light-dark()` and `data-theme` rules resolve System,
-Light and Dark immediately. Keep pre-paint initialization and storage behavior
-in `src/scripts/theme.js` unchanged. No component JavaScript detects theme state.
+- A `<details>` element titled `Quellen und Lizenzen` at the end of a project
+  page. Complete, but collapsed.
 
-### Animation and accessibility
+### Update note
 
-The letter fades over 180ms; the dot translates and uniformly enlarges over 560ms
-with the approved restrained easing. Rear geometry begins after 80ms; the outline
-and facial details appear last, completing at 570ms. Closing smoothly reverses
-from the current interpolated values, with no opening delays. Reduced motion
-removes all transitions while retaining every interaction.
+- `Beschreibung aktualisiert: {Monat Jahr}` in Small type at the end of a
+  project page, only while the project is still being worked on. No dates on
+  the homepage or the project index.
 
-Mouse entry reveals; exit restores the monogram unless keyboard focus remains.
-Keyboard focus reveals; native Enter and Space activation toggle. Touch taps
-toggle without synthetic hover. An outside pointer press or focus leaving closes;
-Escape closes even while hovered and never removes keyboard focus. Re-entry or
-activation can reveal again. The localized, stable button name and `aria-pressed`
-describe the current reveal state, including hover and focus. The decorative SVG
-is hidden from assistive technology. Visible focus remains available when closed.
-Without JavaScript, a disabled button preserves the static monogram and dimensions.
+### Article header
 
-### Reuse
+- Back link, `h1`, Lead, then one Small line:
+  `{Datum} · {n} Min. Lesezeit · Projekt: {Name}` (project only when related;
+  `Aktualisiert {Datum}` when updated).
 
-```astro
----
-import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
----
-<HiddenMarkEasterEgg variant="footer" locale="en" />
-<HiddenMarkEasterEgg variant="404" size={180} locale="de" />
-```
+### Links and emphasis
 
-`variant` is required; `size` defaults to 52 or 180 CSS pixels. `locale` defaults
-to German. Pass the shared layout's locale to its footer. Current use is limited
-to the shared footer and existing 404 page; do not introduce additional placements
-without a deliberate content decision. No framework, dependency or runtime
-network request is required.
+- Inline links: `--accent`, underlined. No arrows or icons for external links.
+- A caveat inside running text is a sentence with a bold lead-in, not a
+  coloured box.
+
+### 404 page
+
+- Glyph at 180 px, no frame, beside the bilingual message and a link home.
+
+## Decision checklist
+
+Answer before adding anything visible. One "no" at steps 2–6 means: do not add
+it in that form.
+
+1. Is there already a component for it? Then use that one.
+2. Does it work with existing tokens only (no new colour, font, size, radius,
+   shadow)?
+3. If it adds a label, number, icon, badge or date: would a reader lose real
+   information without it?
+4. If you removed it, would the page get worse?
+5. Is it readable at 360 px width, in dark mode and with the keyboard?
+6. Would it still look appropriate in five years?
+
+## Never
+
+- Numbered labels (`01 /`, `02 —`), `FIG.`, uppercase micro-labels.
+- Status dots or badges, progress bars, "currently building" banners.
+- Cards with shadows, bento grids, gradients, glass, glow, neon.
+- Terminal mock-ups, typewriter effects, cursor effects, scroll animations.
+- Icons for primary navigation; icon rows of social logos.
+- The Protogen in the header, a hero, the favicon or application documents.
+- Invented content: projects, numbers, testimonials or skill levels.
+
+## Page recipes
+
+| Page | Components, in order |
+| --- | --- |
+| Home | Header · Homepage intro · Project list · Footer |
+| Projects | Header · `h1` · Project index items · Footer |
+| Project | Header · Project header · Project sections (with figures, code) · Sources · Update note · Footer |
+| Blog index | Header · `h1` · list of articles (title, one sentence, date in Small type) · Footer |
+| Article | Header · Article header · Reading text · back link · Footer |
+| 404 | Header · 404 content · Footer |
+
+## Implementation status
+
+| Rule | Status |
+| --- | --- |
+| Palette and theme switching | Implemented |
+| Literata for all long-form text | To change: project prose uses Familjen Grotesk |
+| Remove `01 —` labels and `FIG.` | To change: project pages, `ProjectFigure`, diagram SVGs |
+| Language switch and metadata in Interface type instead of Mono | To change |
+| Wordmark without hover alias | To change: remove `.brand-alias` |
+| Footer with text links and Glyph as signature | Proposed; confirm before implementing |
+| Glyph replaces the v8 Hidden Signature | To implement; v8 artwork is retired |
+| Favicon 16 px drawing and dark-tab outline | To design |
+| Homepage intro and project list | Waiting for copy |
+| Project header with Zeitraum, Rolle, Technik | To implement |

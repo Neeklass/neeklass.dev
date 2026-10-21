@@ -3,11 +3,15 @@
 Build a durable personal technical home for Niklas Dittmann (`neeklass`).
 Let genuine writing and real work provide its substance.
 
-- The homepage is intentionally minimal: its main content is only the name
-  `Niklas Dittmann` in one `h1`, in both languages. Do not add positioning copy,
-  portfolio sections, project placeholders, experience placeholders or biography
-  until real content and a deliberate content decision exist. Preserve functional
-  site chrome and neutral locale-aware metadata.
+- Before any visible change, read `docs/brand-system.md` (visual rules,
+  components, decision checklist) and `docs/content-guide.md` (what goes where,
+  page structures). Use an existing component first; extend the brand system
+  document before introducing a new component or token.
+- Niklas writes all public copy in German and English. Never write, rewrite or
+  translate final copy. Use clearly marked `[placeholders]` with a short hint
+  instead, following the templates in `docs/content-guide.md`.
+- The homepage follows the "Home" recipe in `docs/brand-system.md`: name,
+  intro, selected projects. Do not add sections beyond that recipe.
 
 - `neeklass.dev` is intentionally a single Astro application. Blog, projects,
   about and CV are sections of the same site. Do not split them into separate
@@ -20,10 +24,11 @@ Let genuine writing and real work provide its substance.
 - Keep route names English (`/projects`, `/about`). Link real translations
   explicitly; never redirect based on browser language or translate at runtime.
 - Preserve the minimal editorial layout and system-aware light/dark theme. Use the approved locally hosted typefaces and canonical vector marks from `docs/brand-system.md`.
-- Keep the visual language restrained and editorial. Use text for primary
-  navigation and icons only for utilities or external profiles. Avoid generic
-  AI/SaaS aesthetics, excessive cards, gradients, glass effects, terminal
-  simulations and unnecessary animation.
+- Keep the visual language restrained and editorial. Use text for navigation
+  and contact links; icons only for utility controls such as the theme switch.
+  Follow the "Never" list in `docs/brand-system.md`: no numbered labels, status
+  dots, cards with shadows, gradients, glass effects, terminal simulations or
+  scroll animation.
 - Keep semantic palette values in `src/styles/global.css`; reserve Apricot and Lavender for meaningful illustrations. Appearance defaults to System; manual
   Light/Dark choices persist locally. Keep the theme control's pre-paint
   initialization and no-JavaScript system fallback. The Hidden Signature adds
