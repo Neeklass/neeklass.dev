@@ -6,10 +6,12 @@ interface Props {
   alt: string;
   width: number;
   height: number;
-  number: string;
+  /** Figure number, counted per page (Abb. 1, Abb. 2, …). */
+  number: number;
   locale: Locale;
 }
 const { src, alt, width, height, number, locale } = Astro.props;
+const ui = labels[locale];
 ---
 
 <figure class="project-figure">
@@ -17,8 +19,8 @@ const { src, alt, width, height, number, locale } = Astro.props;
     <img src={src} alt={alt} width={width} height={height} loading="lazy" decoding="async" />
   </a>
   <figcaption>
-    <span class="editorial-meta">FIG. {number}</span>
+    <span class="figure-number">{ui.figure} {number}</span>
     <slot />
-    <a href={src}>{labels[locale].openFullImage}</a>
+    <a class="figure-link" href={src}>{ui.openFullImage}</a>
   </figcaption>
 </figure>

@@ -1,10 +1,7 @@
 ---
 import '../styles/global.css';
 import ThemeControl from '../components/ThemeControl.astro';
-import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
-import GithubIcon from '../components/icons/GithubIcon.astro';
-import MailIcon from '../components/icons/MailIcon.astro';
-import RssIcon from '../components/icons/RssIcon.astro';
+import Glyph from '../components/Glyph.astro';
 import { BLOG_VISIBLE } from '../lib/features';
 import themeScript from '../scripts/theme.js?raw';
 import {
@@ -58,7 +55,8 @@ const year = new Date().getFullYear();
     {pageTranslations.de && (
       <link rel="alternate" hreflang="x-default" href={new URL(pageTranslations.de, Astro.site)} />
     )}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+    <link rel="icon" type="image/svg+xml" sizes="any" href="/favicon.svg" />
     <link rel="preload" href="/fonts/familjen-grotesk-variable.ttf" as="font" type="font/ttf" crossorigin />
     <meta property="og:type" content={article ? 'article' : 'website'} />
     {article && <meta property="article:published_time" content={article.publishedAt.toISOString()} />}
@@ -82,7 +80,6 @@ const year = new Date().getFullYear();
         <a class="brand" href={homePaths[locale]} aria-label={`neeklass — ${ui.home}`}>
           <img class="brand-art brand-art--light" src="/brand/wordmark-light.svg" alt="" width="180" height="45" />
           <img class="brand-art brand-art--dark" src="/brand/wordmark-dark.svg" alt="" width="180" height="45" />
-          <span class="brand-alias" aria-hidden="true">Niklas</span>
         </a>
         <div class="header-navigation">
           <nav class="primary-navigation" aria-label={ui.navigation}>
@@ -111,13 +108,15 @@ const year = new Date().getFullYear();
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© {year} Niklas Dittmann</span>
-        <div class="footer-links">
-          <HiddenMarkEasterEgg variant="footer" locale={locale} />
-          <a class="icon-control" href="https://github.com/Neeklass" rel="me" aria-label="GitHub" title="GitHub"><GithubIcon /></a>
-          <a class="icon-control" href="mailto:mail@neeklass.dev" aria-label={ui.sendEmail} title={ui.sendEmail}><MailIcon /></a>
-          {BLOG_VISIBLE && <a class="icon-control" href={`${blogPaths[locale]}rss.xml`} aria-label={ui.rssSubscribe} title={ui.rssSubscribe}><RssIcon /></a>}
-        </div>
+        <p class="footer-signature">
+          <Glyph variant="footer" locale={locale} />
+          <span>© {year} Niklas Dittmann</span>
+        </p>
+        <ul class="footer-links">
+          <li><a href="https://github.com/Neeklass" rel="me">GitHub</a></li>
+          <li><a href="mailto:mail@neeklass.dev">mail@neeklass.dev</a></li>
+          {BLOG_VISIBLE && <li><a href={`${blogPaths[locale]}rss.xml`}>RSS</a></li>}
+        </ul>
       </footer>
     </div>
   </body>

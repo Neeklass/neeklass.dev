@@ -23,19 +23,17 @@ const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schlesw
 
   <section class="project-section" aria-labelledby="architecture-title">
     <div class="reading-column">
-      <p class="editorial-meta">01 — Architektur</p>
       <h2 id="architecture-title">Eine Datenbasis, zwei Schnittstellen</h2>
       <p>REST-API und MCP-Server greifen auf dieselben Domänenfunktionen, Datenprovider, Validierungsregeln und Modelle zurück. Fünf Datensätze liegen als manuell aufbereitete Snapshots in der Anwendung. Der Wasserstand wird dagegen bei einer Anfrage über einen externen Dienst abgerufen.</p>
     </div>
     <figure class="architecture-figure">
       <ThemeIllustration light={`${imageBase}/mcp-architecture-light.svg`} dark={`${imageBase}/mcp-architecture-dark.svg`} width={1100} height={1510} alt="Architekturdiagramm: Webanwendungen greifen über REST zu, KI-Assistenten über MCP. Beide verwenden gemeinsame Logik, validierte Daten und einen externen Live-Dienst." openLabel={ui.openFullImage} scrollLabel={ui.diagramScroll} />
-      <figcaption><span class="editorial-meta">FIG. 01</span><p><strong>Systemarchitektur von Schleswig MCP.</strong> Zwei unterschiedliche Schnittstellen nutzen gemeinsame Anwendungslogik und Datenverarbeitung. Das Diagramm unterscheidet vorbereitete Datensätze von Live-Abfragen.</p></figcaption>
+      <figcaption><span class="figure-number">Abb. 1</span><p><strong>Systemarchitektur von Schleswig MCP.</strong> Zwei unterschiedliche Schnittstellen nutzen gemeinsame Anwendungslogik und Datenverarbeitung. Das Diagramm unterscheidet vorbereitete Datensätze von Live-Abfragen.</p></figcaption>
     </figure>
   </section>
 
   <section class="project-section" aria-labelledby="comparison-title">
     <div class="reading-column">
-      <p class="editorial-meta">02 — Vergleich: ohne und mit MCP</p>
       <h2 id="comparison-title">Von allgemeinen Schlussfolgerungen zu datensatzgestützten Antworten</h2>
       <p>Ich habe Claude dieselbe Frage zur Bevölkerungsprognose für Schleswig zwischen 2020 und 2040 gestellt – einmal ohne und einmal mit Schleswig MCP. Der Vergleich zeigt vor allem, was sich durch den Zugriff auf eine konkrete Datenquelle verändert; er ist kein allgemeiner Benchmark zur Genauigkeit von KI-Modellen.</p>
     </div>
@@ -45,7 +43,7 @@ const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schlesw
           <h3 id="without-title">Ohne Schleswig MCP</h3>
           <p>Ohne MCP-Tool suchte Claude im Web, fand aber keine konkrete Stadtprognose für den angefragten Zeitraum. Stattdessen verwendete es regionale Informationen und kennzeichnete seine Einschätzung ausdrücklich als Schlussfolgerung, nicht als gesicherte Prognose für Schleswig.</p>
         </div>
-        <ProjectFigure src={`${imageBase}/claude-no-mcp.png`} width={1577} height={1175} number="02" locale="de" alt="Claude erklärt ohne MCP, dass für die Stadt Schleswig keine präzise Bevölkerungsprognose gefunden wurde.">
+        <ProjectFigure src={`${imageBase}/claude-no-mcp.png`} width={1577} height={1175} number={2} locale="de" alt="Claude erklärt ohne MCP, dass für die Stadt Schleswig keine präzise Bevölkerungsprognose gefunden wurde.">
           <p><strong>Claude ohne MCP.</strong> Ohne Zugriff auf den lokalen Datensatz bleibt die Antwort eine vorsichtig formulierte Schlussfolgerung auf Basis der Webrecherche.</p>
         </ProjectFigure>
       </section>
@@ -54,7 +52,7 @@ const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schlesw
           <h3 id="with-title">Mit Schleswig MCP</h3>
           <p>Mit angebundenem MCP-Server konnte Claude die strukturierte Bevölkerungsprognose direkt abrufen. Es gab konkrete Werte für 2020, 2030, 2035 und 2040 aus dem Datensatz aus und erläuterte den erwarteten Verlauf.</p>
         </div>
-        <ProjectFigure src={`${imageBase}/claude-with-mcp.png`} width={1578} height={1175} number="03" locale="de" alt="Claude mit Schleswig MCP zeigt tabellarische Einwohnerprognosen für die Jahre 2020, 2030, 2035 und 2040.">
+        <ProjectFigure src={`${imageBase}/claude-with-mcp.png`} width={1578} height={1175} number={3} locale="de" alt="Claude mit Schleswig MCP zeigt tabellarische Einwohnerprognosen für die Jahre 2020, 2030, 2035 und 2040.">
           <p><strong>Claude mit Schleswig MCP.</strong> Claude ruft Bevölkerungsprognosen über das MCP-Tool ab und stellt die Werte als Tabelle mit Erläuterung dar. Es handelt sich um Prognosen aus der veröffentlichten Quelle, nicht um aktuelle Einwohnerzahlen.</p>
         </ProjectFigure>
       </section>
@@ -63,18 +61,16 @@ const translations = { de: '/projects/schleswig-mcp/', en: '/en/projects/schlesw
 
   <section class="project-section" aria-labelledby="visualization-title">
     <div class="reading-column">
-      <p class="editorial-meta">03 — Weiterverarbeitung</p>
       <h2 id="visualization-title">Strukturierte Daten visualisieren</h2>
       <p>Nach dem Abruf kann Claude dieselben Daten für Folgeaufgaben nutzen – etwa für Tabellen, Vergleiche und Diagramme. Die zugrunde liegende Veröffentlichung muss dafür nicht erneut manuell gesucht und ausgelesen werden.</p>
     </div>
-    <ProjectFigure src={`${imageBase}/claude-data-visualization.png`} width={1577} height={1175} number="04" locale="de" alt="Claude visualisiert die Bevölkerungsprognosen für Schleswig bis 2040 und erläutert die Grenzen der Achsendarstellung.">
+    <ProjectFigure src={`${imageBase}/claude-data-visualization.png`} width={1577} height={1175} number={4} locale="de" alt="Claude visualisiert die Bevölkerungsprognosen für Schleswig bis 2040 und erläutert die Grenzen der Achsendarstellung.">
       <p><strong>Visualisierung mit MCP-Daten.</strong> Claude erzeugt eine Grafik aus den abgerufenen Bevölkerungsprognosen. Die zugehörige Antwort weist darauf hin, dass die Zeitabstände im Diagramm nicht proportional dargestellt sind und die vertikale Achse bei 25.000 beginnt. Beides beeinflusst den visuellen Eindruck der Veränderung.</p>
     </ProjectFigure>
   </section>
 
   <section class="project-section" aria-labelledby="decisions-title">
     <div class="reading-column">
-      <p class="editorial-meta">04 — Technische Entscheidungen und Grenzen</p>
       <h2 id="decisions-title">Architekturentscheidungen und Kompromisse</h2>
       <p>Die Anwendung trennt Datenquellen, Validierung und fachliche Modelle von den öffentlichen Schnittstellen. REST und MCP verwenden dieselben Domänenfunktionen, unterscheiden sich aber in ihren Protokollen und Antwortformaten. Metadaten dokumentieren Herkunft, Lizenzen, Referenzzeitpunkte und bekannte Einschränkungen.</p>
       <p>Fünf Datensätze werden nicht automatisch aktualisiert, sondern liegen als manuell aufbereitete Snapshots vor. Nur der Wasserstand wird live abgefragt; der Pegelwert selbst ist weder eine Hochwasserwarnung noch eine Aussage zur Badesicherheit. Das Projekt soll öffentliche Daten nachvollziehbar zugänglich machen, nicht Vollständigkeit oder Echtzeitaktualität für alle Quellen versprechen.</p>

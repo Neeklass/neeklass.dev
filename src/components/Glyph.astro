@@ -1,0 +1,255 @@
+---
+// The Protogen Glyph (docs/brand-system.md, "Glyph (Protogen)").
+// Resting state is the `n.` monogram; hover, focus or activation opens it.
+// Geometry, timing and interaction follow the construction table exactly.
+import { labels, type Locale } from '../i18n';
+
+interface Props {
+  variant: 'footer' | '404';
+  locale?: Locale;
+}
+const { variant, locale = 'de' } = Astro.props;
+const size = variant === '404' ? 180 : 52;
+const clipId = `glyph-face-${crypto.randomUUID()}`;
+---
+
+<span class="glyph" style={`--glyph-size:${size}px`}>
+  <button class="glyph__button" type="button" data-glyph aria-pressed="false" aria-label={labels[locale].glyph} disabled>
+    <svg class="glyph__svg" viewBox="0 0 480 480" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <defs>
+        <clipPath id={clipId} clipPathUnits="userSpaceOnUse"><circle cx="292" cy="282" r="109" /></clipPath>
+      </defs>
+
+      <g class="glyph__ears">
+        <path class="glyph__ear" d="M262 186 L304 40 L346 196 Z" />
+        <path class="glyph__ear" d="M162 250 L130 44 L252 202 Z" />
+      </g>
+
+      <g class="glyph__visor-group">
+        <circle class="glyph__visor" cx="292" cy="282" r="112" />
+        <g clip-path={`url(#${clipId})`}>
+          <g class="glyph__face">
+            <path class="glyph__eye" d="M282 252 Q304 222 328 250" />
+            <path class="glyph__mouth" d="M306 334 L322 322 L338 334 L354 322 L370 334 Q386 334 398 316" />
+          </g>
+        </g>
+      </g>
+
+      <path class="glyph__spike" d="M134 254 L82 282 L134 310 Z" />
+      <circle class="glyph__module" cx="172" cy="282" r="46" />
+
+      <g class="glyph__letter" transform="translate(80 385) scale(.6)">
+        <path d="M450 -250L390 -250Q390 -329 377.5 -373Q365 -417 339.5 -435Q314 -453 274 -453L274 -508Q358 -508 402.5 -454.5Q447 -401 449 -302ZM85 -500L145 -500L145 0L85 0ZM390 -250L450 -250L450 0L390 0ZM117 -350L85 -360Q85 -360 94 -375Q103 -390 120 -412Q137 -434 160.5 -456Q184 -478 213 -493Q242 -508 275 -508L275 -453Q241 -453 212 -437.5Q183 -422 161.5 -401.5Q140 -381 128.5 -365.5Q117 -350 117 -350ZM95 -445L15 -465L15 -500L95 -500ZM135 0L135 -55L215 -35L215 0ZM15 0L15 -35L95 -55L95 0ZM440 0L440 -55L520 -35L520 0Z" />
+      </g>
+
+      <!-- The dot: monogram dot at rest, core of the ear module when open. -->
+      <circle class="glyph__dot" cx="405" cy="367" r="24" />
+    </svg>
+  </button>
+</span>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-glyph]').forEach((button) => {
+    button.disabled = false;
+    const setOpen = (open: boolean) => button.setAttribute('aria-pressed', String(open));
+    const close = () => setOpen(false);
+
+    // Touch uses click only, avoiding synthetic or sticky hover reveals.
+    button.addEventListener('pointerenter', (event) => {
+      if (event.pointerType === 'mouse') setOpen(true);
+    });
+    button.addEventListener('pointerleave', (event) => {
+      if (event.pointerType === 'mouse' && !button.matches(':focus-visible')) close();
+    });
+    button.addEventListener('focus', () => {
+      if (button.matches(':focus-visible')) setOpen(true);
+    });
+    button.addEventListener('blur', close);
+    // Enter and Space trigger click on a native button.
+    button.addEventListener('click', () => {
+      setOpen(button.getAttribute('aria-pressed') !== 'true');
+    });
+    document.addEventListener('pointerdown', (event) => {
+      if (event.target instanceof Node && !button.contains(event.target)) close();
+    });
+    // Escape closes without moving keyboard focus.
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') close();
+    });
+  });
+</script>
+
+<style>
+  .glyph {
+    --glyph-gap: var(--background);
+    --ease-move: cubic-bezier(.25, .72, .2, 1);
+    --ease-overshoot: cubic-bezier(.3, 1.25, .5, 1);
+    display: inline-flex;
+    flex: none;
+    width: max(44px, var(--glyph-size));
+    max-width: 100%;
+    color: var(--glyph-ink);
+    vertical-align: middle;
+  }
+
+  .glyph__button {
+    display: grid;
+    place-items: center;
+    width: 100%;
+    min-width: 44px;
+    min-height: 44px;
+    aspect-ratio: 1;
+    padding: 0;
+    border: 0;
+    border-radius: var(--radius);
+    background: transparent;
+    color: inherit;
+    cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .glyph__button:disabled {
+    cursor: default;
+  }
+  .glyph__button:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  .glyph__svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  /* Shapes */
+  .glyph__ear {
+    fill: var(--glyph-ink);
+    stroke: var(--glyph-ink);
+    stroke-width: 10;
+    stroke-linejoin: round;
+  }
+  .glyph__visor {
+    fill: var(--glyph-visor);
+    stroke: var(--glyph-rim);
+    stroke-width: 6;
+  }
+  .glyph__spike,
+  .glyph__module {
+    fill: var(--glyph-ink);
+    stroke: var(--glyph-gap);
+    stroke-width: 12;
+  }
+  .glyph__eye {
+    fill: none;
+    stroke: var(--glyph-led);
+    stroke-width: 18;
+    stroke-linecap: round;
+  }
+  .glyph__mouth {
+    fill: none;
+    stroke: var(--glyph-led);
+    stroke-width: 11;
+    stroke-linejoin: miter;
+  }
+  .glyph__letter {
+    fill: currentColor;
+  }
+  .glyph__dot {
+    fill: var(--accent);
+  }
+
+  /* Transform origins in glyph coordinates. */
+  .glyph__ears,
+  .glyph__visor-group,
+  .glyph__spike,
+  .glyph__module,
+  .glyph__face {
+    transform-box: view-box;
+  }
+  .glyph__dot {
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .glyph__visor-group,
+  .glyph__module {
+    transform-origin: 172px 282px;
+  }
+  .glyph__spike {
+    transform-origin: 134px 282px;
+  }
+  .glyph__face {
+    transform-origin: 292px 282px;
+  }
+
+  /* Closed (resting) state. Closing returns everything at once in 240 ms. */
+  .glyph__letter,
+  .glyph__dot,
+  .glyph__module,
+  .glyph__visor-group,
+  .glyph__spike,
+  .glyph__ears,
+  .glyph__face {
+    transition:
+      transform 240ms var(--ease-move),
+      opacity 240ms var(--ease-move);
+  }
+  .glyph__module,
+  .glyph__visor-group {
+    transform: scale(0);
+  }
+  .glyph__spike {
+    transform: scaleX(0);
+  }
+  .glyph__ears {
+    opacity: 0;
+    transform: translateY(80px);
+  }
+  .glyph__face {
+    opacity: 0;
+    transform: scaleY(.1);
+  }
+
+  /* Open state, with the staggered timeline from the brand system. */
+  [aria-pressed="true"] .glyph__letter {
+    opacity: 0;
+    transition: opacity 180ms var(--ease-move);
+  }
+  [aria-pressed="true"] .glyph__dot {
+    /* Moves from the monogram dot (405, 367, r 24) to the module core (172, 282, r 22). */
+    transform: translate(-233px, -85px) scale(.9166667);
+    transition: transform 560ms var(--ease-move);
+  }
+  [aria-pressed="true"] .glyph__module {
+    transform: scale(1);
+    transition: transform 360ms var(--ease-overshoot) 200ms;
+  }
+  [aria-pressed="true"] .glyph__visor-group {
+    transform: scale(1);
+    transition: transform 480ms var(--ease-overshoot) 240ms;
+  }
+  [aria-pressed="true"] .glyph__spike {
+    transform: scaleX(1);
+    transition: transform 300ms var(--ease-move) 300ms;
+  }
+  [aria-pressed="true"] .glyph__ears {
+    opacity: 1;
+    transform: none;
+    transition:
+      transform 380ms var(--ease-move) 380ms,
+      opacity 120ms var(--ease-move) 380ms;
+  }
+  [aria-pressed="true"] .glyph__face {
+    opacity: 1;
+    transform: none;
+    transition:
+      transform 200ms var(--ease-move) 640ms,
+      opacity 200ms var(--ease-move) 640ms;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .glyph * {
+      transition: none !important;
+    }
+  }
+</style>

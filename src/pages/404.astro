@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
+import Glyph from '../components/Glyph.astro';
 import { homePaths } from '../i18n';
 ---
 
@@ -21,7 +21,7 @@ import { homePaths } from '../i18n';
         <a href={homePaths.de}>← Zur Startseite / <span lang="en">Back home</span></a>
       </p>
     </div>
-    <HiddenMarkEasterEgg variant="404" />
+    <Glyph variant="404" />
   </section>
 </BaseLayout>
 
@@ -32,7 +32,7 @@ import { homePaths } from '../i18n';
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
-    gap: var(--space-medium);
+    gap: var(--space-4);
     max-width: 46rem;
   }
 
@@ -41,7 +41,7 @@ import { homePaths } from '../i18n';
   }
 
   .back-home {
-    margin-top: var(--space-medium);
+    margin-top: var(--space-4);
     line-height: 1.6;
   }
 </style>

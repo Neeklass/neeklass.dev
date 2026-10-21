@@ -1,0 +1,23 @@
+---
+// Marks copy that Niklas still has to write (see docs/content-guide.md).
+// Visible in development; a production build fails while any placeholder is
+// rendered, so unfinished copy can never be deployed by accident.
+interface Props {
+  hint: string;
+}
+const { hint } = Astro.props;
+if (import.meta.env.PROD) {
+  throw new Error(`Unfilled copy placeholder: "${hint}" (${Astro.url.pathname}). Replace it with real copy before building for production.`);
+}
+---
+
+<mark class="copy-placeholder" data-placeholder>[{hint}]</mark>
+
+<style>
+  .copy-placeholder {
+    background: none;
+    color: var(--accent);
+    outline: 1px dashed var(--accent);
+    outline-offset: 2px;
+  }
+</style>
