@@ -343,6 +343,6 @@ it in that form.
 | Wordmark without hover alias | Implemented |
 | Footer with text links and Glyph as signature | Implemented; LinkedIn link waiting for the profile URL |
 | Glyph replaces the v8 Hidden Signature | Implemented; v8 component removed |
-| Favicon 16 px drawing and dark-tab outline | To design |
+| Favicon 16 px drawing and dark-tab outline | Drawn (`public/brand/favicon-16.svg`, rendered to `public/favicon-16.png`); confirm on real devices |
 | Homepage intro and project list | Waiting for copy |
 | Project header with Zeitraum, Rolle, Technik | To implement |
