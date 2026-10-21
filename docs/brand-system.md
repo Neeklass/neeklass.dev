@@ -341,8 +341,8 @@ it in that form.
 | Remove `01 —` labels and `FIG.` | Implemented on pages and `ProjectFigure`; diagram SVGs: to change |
 | Language switch and metadata in Interface type instead of Mono | Implemented |
 | Wordmark without hover alias | Implemented |
-| Footer with text links and Glyph as signature | Proposed; confirm before implementing |
-| Glyph replaces the v8 Hidden Signature | To implement; v8 artwork is retired |
+| Footer with text links and Glyph as signature | Implemented; LinkedIn link waiting for the profile URL |
+| Glyph replaces the v8 Hidden Signature | Implemented; v8 component removed |
 | Favicon 16 px drawing and dark-tab outline | To design |
 | Homepage intro and project list | Waiting for copy |
 | Project header with Zeitraum, Rolle, Technik | To implement |

@@ -1,10 +1,7 @@
 ---
 import '../styles/global.css';
 import ThemeControl from '../components/ThemeControl.astro';
-import HiddenMarkEasterEgg from '../components/HiddenMarkEasterEgg.astro';
-import GithubIcon from '../components/icons/GithubIcon.astro';
-import MailIcon from '../components/icons/MailIcon.astro';
-import RssIcon from '../components/icons/RssIcon.astro';
+import Glyph from '../components/Glyph.astro';
 import { BLOG_VISIBLE } from '../lib/features';
 import themeScript from '../scripts/theme.js?raw';
 import {
@@ -110,13 +107,15 @@ const year = new Date().getFullYear();
         <slot />
       </main>
       <footer class="site-footer">
-        <span>© {year} Niklas Dittmann</span>
-        <div class="footer-links">
-          <HiddenMarkEasterEgg variant="footer" locale={locale} />
-          <a class="icon-control" href="https://github.com/Neeklass" rel="me" aria-label="GitHub" title="GitHub"><GithubIcon /></a>
-          <a class="icon-control" href="mailto:mail@neeklass.dev" aria-label={ui.sendEmail} title={ui.sendEmail}><MailIcon /></a>
-          {BLOG_VISIBLE && <a class="icon-control" href={`${blogPaths[locale]}rss.xml`} aria-label={ui.rssSubscribe} title={ui.rssSubscribe}><RssIcon /></a>}
-        </div>
+        <p class="footer-signature">
+          <Glyph variant="footer" locale={locale} />
+          <span>© {year} Niklas Dittmann</span>
+        </p>
+        <ul class="footer-links">
+          <li><a href="https://github.com/Neeklass" rel="me">GitHub</a></li>
+          <li><a href="mailto:mail@neeklass.dev">mail@neeklass.dev</a></li>
+          {BLOG_VISIBLE && <li><a href={`${blogPaths[locale]}rss.xml`}>RSS</a></li>}
+        </ul>
       </footer>
     </div>
   </body>
