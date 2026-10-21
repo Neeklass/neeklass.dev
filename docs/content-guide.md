@@ -17,6 +17,11 @@ may:
 Tools never write final copy, never invent facts, numbers, dates, roles or
 results, and never translate a text Niklas has not approved.
 
+Placeholders use the `Placeholder` component
+(`<Placeholder hint="Was ich gelernt habe: zwei bis drei Lektionen" />`). It is
+visible in development, and a production build fails while any placeholder is
+rendered, so unfinished copy cannot be deployed.
+
 ## What appears where
 
 | Information | Homepage | Project index | Project page | CV (not on the site) |

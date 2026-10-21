@@ -50,7 +50,9 @@ Let genuine writing and real work provide its substance.
   skip links, contrast, alt text, document language and reduced-motion support.
 - Keep changes incremental and deployment simple through GitHub Actions/Pages.
   Domain and URL handling must remain portable to other static hosting.
-- Run `npm run check` and `npm run build` before completing implementation work.
+- Run `npm run check`, `npm run test:brand` and `npm run build` before
+  completing implementation work. `scripts/check-brand.mjs` enforces the
+  mechanical "Never" rules; extend it instead of adding prose rules here.
 
 The README records current scope, locale conventions and the next phases.
 
