@@ -27,6 +27,20 @@ jobs:
       - name: Brand rules
         run: npm run check:brand && npm run test:brand
       - name: Check and build
+        # Copy placeholders are reported separately below, so this step
+        # verifies the code itself even while copy is pending.
         run: npm run build
+        env:
+          ALLOW_COPY_PLACEHOLDERS: '1'
       - name: Blog tests
         run: npm run test:blog
+      - name: Copy placeholders
+        shell: bash
+        run: |
+          matches=$(grep -rn --include='*.astro' '<Placeholder' src | grep -v '^src/components/Placeholder.astro' || true)
+          if [ -n "$matches" ]; then
+            echo "$matches" | sed -E 's/^([^:]+):([0-9]+):.*hint=["{]([^"}]*).*/::error file=\1,line=\2::Copy missing: \3/'
+            echo "Copy placeholders remain; this pull request waits for Niklas's text."
+            exit 1
+          fi
+          echo "No copy placeholders."
