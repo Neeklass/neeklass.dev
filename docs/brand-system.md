@@ -36,7 +36,9 @@ These six rules decide every case the rest of the document does not cover.
 5. **Quiet by default, personal in one place.** The Protogen Glyph is an easter
    egg (footer, 404). It never appears in the header, a hero or a CV.
 6. **Nothing that ages visibly.** No dates on overview pages, no effects tied
-   to a design trend, no claims that need constant updating.
+   to a design trend, no claims that need constant updating. Exception: the
+   blog index and article headers show publication dates, because for writing
+   the date is real information.
 
 ## Identity elements
 
